@@ -40,11 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractSystem.cs" />
     <Compile Include="API\IComponent.cs" />
     <Compile Include="API\IEntity.cs" />
     <Compile Include="API\IWorld.cs" />
-    <Compile Include="DelayedList.cs" />
-    <Compile Include="Process.cs" />
+    <Compile Include="API\ISystem.cs" />
+    <Compile Include="SystemHandler.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityPool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

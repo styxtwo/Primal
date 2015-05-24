@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 namespace Primal {
     public class World : IWorld {
         EntityPool entities;
-        ProcessPool processes;
+        SystemPool processes;
 
         public World() {
             entities = new EntityPool();
             entities.EntityChanged += EntityChanged;
-            processes = new ProcessPool();
+            processes = new SystemPool();
         }
 
-        public void AddSystem(Process process) {
+        public void AddSystem(ISystem process) {
             processes.Add(process);
         }
 

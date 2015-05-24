@@ -1,11 +1,12 @@
 ﻿using Primal.API;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Utilities.Extensions;
+
 namespace Primal {
+    /// <summary>
+    /// Provides an implementation for the IEntity interface. 
+    /// </summary>
     public class Entity : IEntity {
         public event Action<IEntity> ComponentsChanged;
         private IDictionary<Type, IComponent> components;
@@ -31,6 +32,12 @@ namespace Primal {
             return false;
         }
 
+        public T Get<T>(){
+            IComponent component;
+            components.TryGetValue(typeof(T), out component);
+            return (T)component;
+        }
+
         public bool Contains<T>() {
             return Contains(typeof(T));
         }
@@ -48,16 +55,12 @@ namespace Primal {
             return true;
         }
 
-        public T Get<T>(){
-            IComponent component;
-            components.TryGetValue(typeof(T), out component);
-            return (T)component;
-        }
-
-        public int ComponentCount {
-            get {
-                return components.Count;
+        internal void Dispose() {
+            foreach (IComponent component in components.Values) {
+                component.Dispose();
             }
+            components.Clear();
+            ComponentsChanged = null;
         }
     }
 }
