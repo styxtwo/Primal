@@ -43,6 +43,7 @@
     <Compile Include="API\IDebugInfo.cs" />
     <Compile Include="API\IFinder.cs" />
     <Compile Include="Main\DebugInfo.cs" />
+    <Compile Include="Main\Elements\AbstractComponent.cs" />
     <Compile Include="Main\Elements\AbstractSystem.cs" />
     <Compile Include="API\IComponent.cs" />
     <Compile Include="API\IEntity.cs" />
