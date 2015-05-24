@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 
 namespace Primal {
+    /// <summary>
+    /// Abstract implementation of the ISystem interface.
+    /// </summary>
     public abstract class AbstractSystem : ISystem {
         private ISet<Type> keyComponents;
 
@@ -17,15 +20,15 @@ namespace Primal {
             keyComponents.Add(typeof(T));
         }
 
-        public virtual void UpdateEntity(API.IEntity entity) {
+        public virtual void UpdateEntity(IEntity entity, double elapsedMs) {
             //Empty, to be overridden.
         }
 
-        public virtual void BeforeUpdate() {
+        public virtual void BeforeUpdate(double elapsedMs) {
             //Empty, to be overridden.
         }
 
-        public virtual void AfterUpdate() {
+        public virtual void AfterUpdate(double elapsedMs) {
             //Empty, to be overridden.
         }
 

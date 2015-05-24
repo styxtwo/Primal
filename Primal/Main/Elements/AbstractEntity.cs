@@ -7,11 +7,11 @@ namespace Primal {
     /// <summary>
     /// Provides an implementation for the IEntity interface. 
     /// </summary>
-    public class Entity : IEntity {
+    public class AbstractEntity : IEntity {
         public event Action<IEntity> ComponentsChanged;
         private IDictionary<Type, IComponent> components;
 
-        public Entity() {
+        public AbstractEntity() {
             components = new Dictionary<Type, IComponent>();
         }
 
@@ -55,7 +55,7 @@ namespace Primal {
             return true;
         }
 
-        internal void Dispose() {
+        public void Dispose() {
             foreach (IComponent component in components.Values) {
                 component.Dispose();
             }

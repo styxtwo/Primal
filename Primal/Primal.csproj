@@ -40,18 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractSystem.cs" />
+    <Compile Include="API\IDebugInfo.cs" />
+    <Compile Include="API\IFinder.cs" />
+    <Compile Include="Main\DebugInfo.cs" />
+    <Compile Include="Main\Elements\AbstractSystem.cs" />
     <Compile Include="API\IComponent.cs" />
     <Compile Include="API\IEntity.cs" />
     <Compile Include="API\IWorld.cs" />
     <Compile Include="API\ISystem.cs" />
-    <Compile Include="SystemHandler.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="EntityPool.cs" />
+    <Compile Include="Main\EntityFinder.cs" />
+    <Compile Include="Main\SystemWrapper.cs" />
+    <Compile Include="Main\Elements\AbstractEntity.cs" />
+    <Compile Include="Main\Entities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemPool.cs" />
-    <Compile Include="World.cs" />
-    <Compile Include="WorldFactory.cs" />
+    <Compile Include="Main\Systems.cs" />
+    <Compile Include="Main\Elements\World.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests\" />

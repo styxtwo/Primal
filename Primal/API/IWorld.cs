@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Primal.API {
 
     /// <summary>
     /// The world in which all entities and systems must exist.
     /// </summary>
     public interface IWorld {
+
+        /// <summary>
+        /// The debug info for this IWorld;
+        /// </summary>
+        IDebugInfo DebugInfo { get; }
+
+        /// <summary>
+        /// The entity finder for this world instance.
+        /// </summary>
+        IFinder EntityFinder { get; }
 
         /// <summary>
         /// Adds a system to the world.

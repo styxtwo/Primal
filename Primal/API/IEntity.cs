@@ -53,5 +53,10 @@ namespace Primal.API {
         /// <param name="types">The list of types of the components to check. </param>
         /// <returns>Whether the entity contains all types. </returns>
         bool ContainsAll(IEnumerable<Type> types);
+
+        /// <summary>
+        /// Disposes of the Entity.
+        /// </summary>
+        void Dispose();
     }
 }

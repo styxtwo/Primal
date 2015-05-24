@@ -1,25 +1,26 @@
 ﻿using Primal.API;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Primal {
-    class SystemHandler {
+    /// <summary>
+    /// Provides a wrapper around the systems, calls the methods of the system in the correct order. 
+    /// Hides system implementation from the API users.
+    /// </summary>
+    class SystemWrapper {
         private IList<IEntity> entities;
         private ISystem system;
-        public SystemHandler(ISystem system) {
+        public SystemWrapper(ISystem system) {
             this.system = system;
             entities = new List<IEntity>();
         }
 
         public void Update(double elapsedMs) {
-            system.BeforeUpdate();
+            system.BeforeUpdate(elapsedMs);
             foreach (IEntity entity in entities.ToList()) {
-                system.UpdateEntity(entity);
+                system.UpdateEntity(entity, elapsedMs);
             }
-            system.AfterUpdate();
+            system.AfterUpdate(elapsedMs);
         }
 
         public void AddEntity(IEntity entity) {
@@ -44,7 +45,7 @@ namespace Primal {
             system.EntityRemoved(entity);
         }
 
-        public void ChangeEntity(IEntity entity) {
+        public void CheckEntityValidity(IEntity entity) {
             if (entities.Contains(entity)) {
                 if (!entity.ContainsAll(system.KeyComponents)) {
                     RemoveEntity(entity);
