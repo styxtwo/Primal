@@ -16,12 +16,10 @@ namespace Primal {
 
         public abstract void AddKeyComponents();
 
+        public abstract void UpdateEntity(IEntity entity, double elapsedMs);
+
         public void AddKeyComponent<T>() where T : IComponent {
             keyComponents.Add(typeof(T));
-        }
-
-        public virtual void UpdateEntity(IEntity entity, double elapsedMs) {
-            //Empty, to be overridden.
         }
 
         public virtual void BeforeUpdate(double elapsedMs) {
