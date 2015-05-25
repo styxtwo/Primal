@@ -6,37 +6,38 @@ namespace Primal{
     /// Provides an implementation of the IDebugInfo interface.
     /// </summary>
     class DebugInfo : IDebugInfo {
-        private int systems;
-        private int entities;
+        private Entities entities;
+        private Systems systems;
 
         public DebugInfo(Entities entities, Systems systems) {
-            entities.EntityAdded += EntityAdded;
-            entities.EntityRemoved += EntityRemoved;
-            systems.SystemAdded += SystemAdded;
-        }
-
-        private void SystemAdded(BaseSystem system) {
-            systems++;
-        }
-
-        private void EntityAdded(Entity entity) {
-            entities++;
-        }
-
-        private void EntityRemoved(Entity entity) {
-            entities--;
+            this.entities = entities;
+            this.systems = systems;
         }
 
         public int TotalSystemCount {
             get {
-                return systems;
+                return systems.SystemCount;
             }
         }
 
         public int TotalEntityCount {
             get {
-                return entities;
+                return entities.EntityCount;
             }
+        }
+
+        public int TotalComponentCount {
+            get {
+                return entities.ComponentCount;
+            }
+        }
+
+        public int ComponentCount(Entity entity) {
+            return entity.ComponentCount;
+        }
+
+        public int EntityCount(BaseSystem system) {
+            return systems.GetEntityCount(system);
         }
     }
 }

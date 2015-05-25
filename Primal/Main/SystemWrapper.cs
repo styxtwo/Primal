@@ -9,32 +9,32 @@ namespace Primal {
     /// Hides system implementation from the API users.
     /// </summary>
     class SystemWrapper {
+        public BaseSystem System { get; private set; }
         private IList<Entity> entities;
-        private BaseSystem system;
         public SystemWrapper(BaseSystem system) {
-            this.system = system;
+            System = system;
             entities = new List<Entity>();
         }
 
         public void Update(double elapsedMs) {
-            system.BeforeUpdate(elapsedMs);
+            System.BeforeUpdate(elapsedMs);
             foreach (Entity entity in entities.ToList()) {
-                system.UpdateEntity(entity, elapsedMs);
+                System.UpdateEntity(entity, elapsedMs);
             }
-            system.AfterUpdate(elapsedMs);
+            System.AfterUpdate(elapsedMs);
         }
 
         public void AddEntity(Entity entity) {
-            if (!entity.ContainsAll(system.KeyComponents)) {
+            if (!entity.ContainsAll(System.KeyComponents)) {
                 //entity does not have the right components
                 return;
             }
-            if(entities.Contains(entity)) {
+            if (entities.Contains(entity)) {
                 //system already contains the entity.
                 return;
             }
             entities.Add(entity);
-            system.EntityAdded(entity);
+            System.EntityAdded(entity);
         }
 
         public void RemoveEntity(Entity entity) {
@@ -43,19 +43,25 @@ namespace Primal {
                 return;
             }
             entities.Remove(entity);
-            system.EntityRemoved(entity);
+            System.EntityRemoved(entity);
         }
 
         public void CheckEntityValidity(Entity entity) {
             if (entities.Contains(entity)) {
-                if (!entity.ContainsAll(system.KeyComponents)) {
+                if (!entity.ContainsAll(System.KeyComponents)) {
                     RemoveEntity(entity);
                 }
             }
             else {
-                if (entity.ContainsAll(system.KeyComponents)) {
+                if (entity.ContainsAll(System.KeyComponents)) {
                     AddEntity(entity);
                 }
+            }
+        }
+
+        public int EntityCount {
+            get {
+                return entities.Count();
             }
         }
     }

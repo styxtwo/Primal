@@ -7,21 +7,22 @@ namespace Primal {
     /// <summary>
     /// Provides a collection for the entities.
     /// </summary>
-    class Entities {
+    class Entities : IFinder {
         public event Action<Entity> EntityChanged;
         public event Action<Entity> EntityAdded;
         public event Action<Entity> EntityRemoved;
 
-        private IList<Entity> entities;
+        private ISet<Entity> entities;
 
         public Entities() {
-            entities = new List<Entity>();
+            entities = new HashSet<Entity>();
         }
 
         public void Add(Entity entity) {
-            entities.Add(entity);
-            entity.ComponentsChanged += EntityComponentsChanged;
-            EntityAdded.NullSafeInvoke(entity);
+            if (entities.Add(entity)) {
+                entity.ComponentsChanged += EntityComponentsChanged;
+                EntityAdded.NullSafeInvoke(entity);
+            }
         }
 
         void EntityComponentsChanged(Entity entity) {
@@ -37,9 +38,29 @@ namespace Primal {
             return false;
         }
 
-        public IEnumerable<Entity> EntityList {
+        public IEnumerable<Entity> Find(IEnumerable<Type> components) {
+            IList<Entity> selected = new List<Entity>();
+            foreach (Entity entity in entities) {
+                if (entity.ContainsAll(components)) {
+                    selected.Add(entity);
+                }
+            }
+            return selected;
+        }
+
+        public int EntityCount {
             get {
-                return entities;
+                return entities.Count;
+            }
+        }
+
+        public int ComponentCount {
+            get {
+                int count = 0;
+                foreach (Entity entity in entities) {
+                    count += entity.ComponentCount;
+                }
+                return count;
             }
         }
     }

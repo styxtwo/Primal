@@ -1,4 +1,5 @@
 ﻿using Primal.API;
+using System;
 
 namespace Primal {
 
@@ -6,7 +7,6 @@ namespace Primal {
     /// Implementation of the IWorld interface.
     /// </summary>
     class World : IWorld {
-        public IFinder EntityFinder { get; private set; }
         public IDebugInfo DebugInfo { get; private set; }
 
         private Entities entities;
@@ -15,7 +15,6 @@ namespace Primal {
         public World() {
             entities = new Entities();
             systems = new Systems(entities);
-            EntityFinder = new EntityFinder(entities);
             DebugInfo = new DebugInfo(entities, systems);
         }
 
@@ -25,6 +24,9 @@ namespace Primal {
         }
 
         public void AddEntity(Entity entity) {
+            if (entity.IsDisposed) {
+                throw (new ArgumentException("Can't add disposed entity."));
+            }
             entities.Add(entity);
         }
 
@@ -35,6 +37,12 @@ namespace Primal {
 
         public void Update(double elapsedMs) {
             systems.Update(elapsedMs);
+        }
+
+        public IFinder EntityFinder {
+            get {
+                return entities;
+            }
         }
     }
 }

@@ -46,7 +46,6 @@
     <Compile Include="Main\Public\Component.cs" />
     <Compile Include="Main\Public\BaseSystem.cs" />
     <Compile Include="API\IWorld.cs" />
-    <Compile Include="Main\EntityFinder.cs" />
     <Compile Include="Main\SystemWrapper.cs" />
     <Compile Include="Main\Public\Entity.cs" />
     <Compile Include="Main\Entities.cs" />
@@ -54,9 +53,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main\Systems.cs" />
     <Compile Include="Main\World.cs" />
+    <Compile Include="Tests\BaseTest.cs" />
+    <Compile Include="Tests\EntityTests.cs" />
+    <Compile Include="Tests\Mocks\ComponentC.cs" />
+    <Compile Include="Tests\Mocks\ComponentB.cs" />
+    <Compile Include="Tests\Mocks\ComponentA.cs" />
+    <Compile Include="Tests\Mocks\EmptySystem.cs" />
+    <Compile Include="Tests\Mocks\SystemBC.cs" />
+    <Compile Include="Tests\Mocks\SystemB.cs" />
+    <Compile Include="Tests\Mocks\SystemA.cs" />
+    <Compile Include="Tests\Mocks\UpdatableSystem.cs" />
+    <Compile Include="Tests\SystemTest.cs" />
+    <Compile Include="Tests\WorldEntityTests.cs" />
+    <Compile Include="Tests\WorldSystemTest.cs" />
+    <Compile Include="Tests\WorldUpdateTests.cs" />
+    <Compile Include="Tests\WorldAdditionTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tests\" />
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities\Utilities.csproj">
