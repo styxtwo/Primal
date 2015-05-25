@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Utilities.Extensions;
 
 namespace Primal {
-
     /// <summary>
     /// Provides a collection for the systems.
     /// </summary>

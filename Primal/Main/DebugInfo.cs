@@ -1,7 +1,6 @@
 ﻿using Primal.Api;
 
 namespace Primal{
-
     /// <summary>
     /// Provides an implementation of the IDebugInfo interface.
     /// </summary>

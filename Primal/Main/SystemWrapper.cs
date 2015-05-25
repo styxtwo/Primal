@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Primal {
-
     /// <summary>
     /// Provides a wrapper around the systems, calls the methods of the system in the correct order. 
     /// Hides system implementation from the API users.

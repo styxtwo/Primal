@@ -2,7 +2,6 @@
 using System;
 
 namespace Primal {
-
     /// <summary>
     /// Implementation of the IWorld interface.
     /// </summary>
