@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Primal.API {
+namespace Primal.Api {
 
     /// <summary>
     /// Provides a class that searches the list of entities for entities with specific components.

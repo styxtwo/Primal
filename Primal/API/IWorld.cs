@@ -1,5 +1,5 @@
 ﻿
-namespace Primal.API {
+namespace Primal.Api {
 
     /// <summary>
     /// The world in which all entities and systems exist, Create using the WorldFactory.

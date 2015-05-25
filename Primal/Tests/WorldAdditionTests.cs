@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Primal.API;
+using Primal.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;

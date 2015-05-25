@@ -1,4 +1,4 @@
-﻿using Primal.API;
+﻿using Primal.Api;
 
 namespace Primal {
 

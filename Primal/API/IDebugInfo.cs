@@ -1,5 +1,5 @@
 ﻿
-namespace Primal.API {
+namespace Primal.Api {
 
     /// <summary>
     /// Provides some debug info.
