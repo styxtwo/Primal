@@ -4,8 +4,8 @@ namespace Primal {
     /// <summary>
     /// Abstract Implementation of the IComponent Interface.
     /// </summary>
-    public class AbstractComponent : IComponent {
-        public void Dispose() {
+    public class Component : IComponent {
+        public virtual void Dispose() {
             //Empty, to be overridden.
         }
     }

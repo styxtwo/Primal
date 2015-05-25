@@ -43,19 +43,19 @@
     <Compile Include="API\IDebugInfo.cs" />
     <Compile Include="API\IFinder.cs" />
     <Compile Include="Main\DebugInfo.cs" />
-    <Compile Include="Main\Elements\AbstractComponent.cs" />
-    <Compile Include="Main\Elements\AbstractSystem.cs" />
+    <Compile Include="Main\Items\Component.cs" />
+    <Compile Include="Main\Items\BaseSystem.cs" />
     <Compile Include="API\IComponent.cs" />
     <Compile Include="API\IEntity.cs" />
     <Compile Include="API\IWorld.cs" />
     <Compile Include="API\ISystem.cs" />
     <Compile Include="Main\EntityFinder.cs" />
     <Compile Include="Main\SystemWrapper.cs" />
-    <Compile Include="Main\Elements\AbstractEntity.cs" />
+    <Compile Include="Main\Items\Entity.cs" />
     <Compile Include="Main\Entities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main\Systems.cs" />
-    <Compile Include="Main\Elements\World.cs" />
+    <Compile Include="Main\Items\World.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests\" />

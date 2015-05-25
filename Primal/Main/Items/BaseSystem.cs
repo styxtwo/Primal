@@ -6,21 +6,23 @@ namespace Primal {
     /// <summary>
     /// Abstract implementation of the ISystem interface.
     /// </summary>
-    public abstract class AbstractSystem : ISystem {
+    public abstract class BaseSystem : ISystem {
+        public IWorld World { get; set; }
+
         private ISet<Type> keyComponents;
 
-        public AbstractSystem() {
+        public BaseSystem() {
             keyComponents = new HashSet<Type>();
             AddKeyComponents();
+        }
+
+        public void AddKeyComponent<T>() where T : IComponent {
+            keyComponents.Add(typeof(T));
         }
 
         public abstract void AddKeyComponents();
 
         public abstract void UpdateEntity(IEntity entity, double elapsedMs);
-
-        public void AddKeyComponent<T>() where T : IComponent {
-            keyComponents.Add(typeof(T));
-        }
 
         public virtual void BeforeUpdate(double elapsedMs) {
             //Empty, to be overridden.

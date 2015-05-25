@@ -9,6 +9,12 @@ namespace Primal {
     /// 
     /// </summary>
     public interface ISystem {
+
+        /// <summary>
+        /// Reference to the world this system resides in.
+        /// </summary>
+        IWorld World { get; set; }
+
         /// <summary>
         /// The components an entity needs for the system to act on it.
         /// </summary>

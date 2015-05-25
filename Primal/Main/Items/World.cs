@@ -18,8 +18,9 @@ namespace Primal {
             DebugInfo = new DebugInfo(entities, systems);
         }
 
-        public void AddSystem(ISystem process) {
-            systems.Add(process);
+        public void AddSystem(ISystem system) {
+            system.World = this;
+            systems.Add(system);
         }
 
         public void AddEntity(IEntity entity) {

@@ -7,11 +7,11 @@ namespace Primal {
     /// <summary>
     /// Provides an implementation for the IEntity interface. 
     /// </summary>
-    public class AbstractEntity : IEntity {
+    public class Entity : IEntity {
         public event Action<IEntity> ComponentsChanged;
         private IDictionary<Type, IComponent> components;
 
-        public AbstractEntity() {
+        public Entity() {
             components = new Dictionary<Type, IComponent>();
         }
 
