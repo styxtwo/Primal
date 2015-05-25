@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Primal.Tests {
-    public abstract class BaseTest {
+    public abstract class BaseTests {
 
         public Entity CreateEntity(params Component[] components) {
             Entity entity = new Entity();

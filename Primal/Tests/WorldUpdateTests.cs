@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestClass]
-    public class WorldUpdateTests : BaseTest {
+    public class WorldUpdateTests : BaseTests {
 
         [TestMethod]
         public void TestMethodsCalled_NoEntity() {

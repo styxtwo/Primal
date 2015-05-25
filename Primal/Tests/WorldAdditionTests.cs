@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestClass]
-    public class WorldAdditionTests : BaseTest {
+    public class WorldAdditionTests : BaseTests {
         [TestMethod]
         public void TestEntityAddition() {
             IWorld world = CreateWorld();

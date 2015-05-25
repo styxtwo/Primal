@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestClass]
-    public class WorldSystemTests : BaseTest{
+    public class WorldSystemTests : BaseTests{
         BaseSystem systemO;
         BaseSystem systemA;
         BaseSystem systemB;
