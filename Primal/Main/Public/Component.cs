@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Primal.API;
 
-namespace Primal.API {
+namespace Primal {
+
     /// <summary>
     /// Provides a component for entities to add. The basic data carrier of the ECS framework.
     /// </summary>
-    public interface IComponent {
+    public class Component {
 
         /// <summary>
         /// disposes of the component.
         /// </summary>
-        void Dispose();
+        public virtual void Dispose() {
+        }
     }
 }

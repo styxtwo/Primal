@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using Utilities.Extensions;
 
 namespace Primal {
+
     /// <summary>
     /// Provides a collection for the systems.
     /// </summary>
     class Systems {
-        public event Action<ISystem> SystemAdded;
+        public event Action<BaseSystem> SystemAdded;
         private IList<SystemWrapper> systems;
 
         public Systems(Entities entities) {
@@ -18,7 +19,7 @@ namespace Primal {
             entities.EntityChanged += EntityChanged;
         }
 
-        public void Add(ISystem system) {
+        public void Add(BaseSystem system) {
             systems.Add(new SystemWrapper(system));
             SystemAdded.NullSafeInvoke(system);
         }
@@ -29,19 +30,19 @@ namespace Primal {
             }
         }
 
-        private void EntityAdded(IEntity entity) {
+        private void EntityAdded(Entity entity) {
             foreach (SystemWrapper system in systems) {
                 system.AddEntity(entity);
             }
         }
 
-        private void EntityRemoved(IEntity entity) {
+        private void EntityRemoved(Entity entity) {
             foreach (SystemWrapper system in systems) {
                 system.RemoveEntity(entity);
             }
         }
 
-        private void EntityChanged(IEntity entity) {
+        private void EntityChanged(Entity entity) {
             foreach (SystemWrapper system in systems) {
                 system.CheckEntityValidity(entity);
             }

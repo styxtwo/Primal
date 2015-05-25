@@ -1,5 +1,6 @@
 ﻿
 namespace Primal.API {
+
     /// <summary>
     /// Provides some debug info.
     /// </summary>

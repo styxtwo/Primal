@@ -1,6 +1,10 @@
 ﻿using Primal.API;
 
 namespace Primal{
+
+    /// <summary>
+    /// Provides an implementation of the IDebugInfo interface.
+    /// </summary>
     class DebugInfo : IDebugInfo {
         private int systems;
         private int entities;
@@ -11,15 +15,15 @@ namespace Primal{
             systems.SystemAdded += SystemAdded;
         }
 
-        private void SystemAdded(ISystem system) {
+        private void SystemAdded(BaseSystem system) {
             systems++;
         }
 
-        private void EntityAdded(IEntity entity) {
+        private void EntityAdded(Entity entity) {
             entities++;
         }
 
-        private void EntityRemoved(IEntity entity) {
+        private void EntityRemoved(Entity entity) {
             entities--;
         }
 

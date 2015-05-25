@@ -1,10 +1,11 @@
 ﻿using Primal.API;
 
 namespace Primal {
+
     /// <summary>
     /// Implementation of the IWorld interface.
     /// </summary>
-    public class World : IWorld {
+    class World : IWorld {
         public IFinder EntityFinder { get; private set; }
         public IDebugInfo DebugInfo { get; private set; }
 
@@ -18,16 +19,16 @@ namespace Primal {
             DebugInfo = new DebugInfo(entities, systems);
         }
 
-        public void AddSystem(ISystem system) {
+        public void AddSystem(BaseSystem system) {
             system.World = this;
             systems.Add(system);
         }
 
-        public void AddEntity(IEntity entity) {
+        public void AddEntity(Entity entity) {
             entities.Add(entity);
         }
 
-        public void RemoveEntity(IEntity entity) {
+        public void RemoveEntity(Entity entity) {
             entities.Remove(entity);
             entity.Dispose();
         }

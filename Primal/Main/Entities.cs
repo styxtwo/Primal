@@ -3,31 +3,32 @@ using System;
 using System.Collections.Generic;
 using Utilities.Extensions;
 namespace Primal {
+
     /// <summary>
     /// Provides a collection for the entities.
     /// </summary>
     class Entities {
-        public event Action<IEntity> EntityChanged;
-        public event Action<IEntity> EntityAdded;
-        public event Action<IEntity> EntityRemoved;
+        public event Action<Entity> EntityChanged;
+        public event Action<Entity> EntityAdded;
+        public event Action<Entity> EntityRemoved;
 
-        private IList<IEntity> entities;
+        private IList<Entity> entities;
 
         public Entities() {
-            entities = new List<IEntity>();
+            entities = new List<Entity>();
         }
 
-        public void Add(IEntity entity) {
+        public void Add(Entity entity) {
             entities.Add(entity);
             entity.ComponentsChanged += EntityComponentsChanged;
             EntityAdded.NullSafeInvoke(entity);
         }
 
-        void EntityComponentsChanged(IEntity entity) {
+        void EntityComponentsChanged(Entity entity) {
             EntityChanged.NullSafeInvoke(entity);
         }
 
-        public bool Remove(IEntity entity) {
+        public bool Remove(Entity entity) {
             if (entities.Remove(entity)) {
                 entity.ComponentsChanged -= EntityComponentsChanged;
                 EntityRemoved.NullSafeInvoke(entity);
@@ -36,7 +37,7 @@ namespace Primal {
             return false;
         }
 
-        public IEnumerable<IEntity> EntityList {
+        public IEnumerable<Entity> EntityList {
             get {
                 return entities;
             }
