@@ -19,7 +19,7 @@ namespace Primal {
 
         public void AddSystem(BaseSystem system) {
             system.World = this;
-            systems.Add(system);
+            systems.Add(system, entities.Find(system.KeyComponents));
         }
 
         public void AddEntity(Entity entity) {

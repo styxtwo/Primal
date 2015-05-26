@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Primal.Api;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestClass]
@@ -83,6 +78,32 @@ namespace Primal.Tests {
             Assert.AreEqual(2, info.EntityCount(systemA));
             Assert.AreEqual(3, info.EntityCount(systemB));
             Assert.AreEqual(2, info.EntityCount(systemBC));
+        }
+
+        [TestMethod]
+        public void TestSystemAddedAfterEntity() {
+            world = CreateWorld();
+            info = world.DebugInfo;
+
+            world.AddEntity(CreateEntity(new ComponentA()));
+            world.AddEntity(CreateEntity(new ComponentB()));
+            world.AddEntity(CreateEntity(new ComponentB(), new ComponentC()));
+
+            systemO = new EmptySystem();
+            systemA = new SystemA();
+            systemB = new SystemB();
+            systemBC = new SystemBC();
+            world.AddSystem(systemO);
+            world.AddSystem(systemA);
+            world.AddSystem(systemB);
+            world.AddSystem(systemBC);
+
+            world.AddEntity(CreateEntity(new ComponentA()));
+
+            Assert.AreEqual(4, info.EntityCount(systemO));
+            Assert.AreEqual(2, info.EntityCount(systemA));
+            Assert.AreEqual(2, info.EntityCount(systemB));
+            Assert.AreEqual(1, info.EntityCount(systemBC));
         }
     }
 }

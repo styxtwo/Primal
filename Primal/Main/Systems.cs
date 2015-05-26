@@ -1,5 +1,4 @@
-﻿using Primal.Api;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Utilities.Extensions;
 
@@ -18,11 +17,17 @@ namespace Primal {
             entities.EntityChanged += EntityChanged;
         }
 
-        public bool Add(BaseSystem system) {
+        public bool Add(BaseSystem system, IEnumerable<Entity> existingEntities) {
             if (systems.ContainsKey(system.GetType())) {
                 return false;
             }
-            systems.Add(system.GetType(), new SystemWrapper(system));
+            SystemWrapper wrapper = new SystemWrapper(system);
+            systems.Add(system.GetType(), wrapper);
+
+            foreach (Entity enitity in existingEntities) {
+                wrapper.AddEntity(enitity);
+            }
+
             SystemAdded.NullSafeInvoke(system);
             return true;
         }

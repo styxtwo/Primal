@@ -40,12 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\IDebugInfo.cs" />
-    <Compile Include="API\IFinder.cs" />
+    <Compile Include="Api\IDebugInfo.cs" />
+    <Compile Include="Api\IFinder.cs" />
     <Compile Include="Main\DebugInfo.cs" />
     <Compile Include="Main\Public\Component.cs" />
     <Compile Include="Main\Public\BaseSystem.cs" />
-    <Compile Include="API\IWorld.cs" />
+    <Compile Include="Api\IWorld.cs" />
     <Compile Include="Main\SystemWrapper.cs" />
     <Compile Include="Main\Public\Entity.cs" />
     <Compile Include="Main\Entities.cs" />
