@@ -43,13 +43,13 @@
     <Compile Include="Api\IDebugInfo.cs" />
     <Compile Include="Api\IFinder.cs" />
     <Compile Include="Main\DebugInfo.cs" />
-    <Compile Include="Main\Public\Component.cs" />
-    <Compile Include="Main\Public\BaseSystem.cs" />
+    <Compile Include="Api\Component.cs" />
+    <Compile Include="Api\BaseSystem.cs" />
     <Compile Include="Api\IWorld.cs" />
     <Compile Include="Main\SystemWrapper.cs" />
-    <Compile Include="Main\Public\Entity.cs" />
+    <Compile Include="Api\Entity.cs" />
     <Compile Include="Main\Entities.cs" />
-    <Compile Include="Main\Public\WorldFactory.cs" />
+    <Compile Include="Api\WorldFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main\Systems.cs" />
     <Compile Include="Main\World.cs" />
