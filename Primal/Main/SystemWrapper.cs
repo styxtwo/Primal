@@ -45,7 +45,7 @@ namespace Primal {
             System.EntityRemoved(entity);
         }
 
-        public void CheckEntityValidity(Entity entity) {
+        public void UpdateEntityValidity(Entity entity) {
             if (entities.Contains(entity)) {
                 if (!entity.ContainsAll(System.KeyComponents)) {
                     RemoveEntity(entity);

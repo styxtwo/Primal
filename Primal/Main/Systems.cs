@@ -52,7 +52,7 @@ namespace Primal {
 
         private void EntityChanged(Entity entity) {
             foreach (SystemWrapper system in systems.Values) {
-                system.CheckEntityValidity(entity);
+                system.UpdateEntityValidity(entity);
             }
         }
 
