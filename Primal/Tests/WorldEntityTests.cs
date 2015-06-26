@@ -25,8 +25,7 @@ namespace Primal.Tests {
         public void TestComponentAddition() {
             Setup();
 
-            Entity entity = CreateEntity();
-            world.AddEntity(entity);
+            Entity entity = world.CreateEntity();
 
             //no components.
             Assert.AreEqual(0, info.EntityCount(systemA));
@@ -73,22 +72,11 @@ namespace Primal.Tests {
         public void TestEntityDisposedOnRemoval() {
             Setup();
 
-            Entity entity = CreateEntity(new ComponentA());
-            world.AddEntity(entity);
+            Entity entity = world.CreateEntity();
+            AddComponents(entity, new ComponentA());
             world.RemoveEntity(entity);
 
             Assert.AreEqual(0, entity.ComponentCount);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestUnableToAddDisposedEntity() {
-            Setup();
-
-            Entity entity = CreateEntity(new ComponentA());
-            world.AddEntity(entity);
-            world.RemoveEntity(entity);
-            world.AddEntity(entity);
         }
     }
 }

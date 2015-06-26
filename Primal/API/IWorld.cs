@@ -23,10 +23,10 @@ namespace Primal.Api {
         void AddSystem(BaseSystem system);
 
         /// <summary>
-        /// Adds an entity to the world.
+        /// Creates an entity in the ECP world.
         /// </summary>
-        /// <param name="entity">The entity to add. </param>
-        void AddEntity(Entity entity);
+        /// <returns>The created entity</returns>
+        Entity CreateEntity();
         
         /// <summary>
         /// Removes an entity from the world.

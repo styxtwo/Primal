@@ -8,12 +8,10 @@ using System.Threading.Tasks;
 namespace Primal.Tests {
     public abstract class BaseTests {
 
-        public Entity CreateEntity(params Component[] components) {
-            Entity entity = new Entity();
+        public void AddComponents(Entity entity, params Component[] components) {
             foreach (Component component in components) {
                 entity.Add(component);
             }
-            return entity;
         }
 
         public IWorld CreateWorld(params BaseSystem[] systems) {

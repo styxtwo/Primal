@@ -12,11 +12,6 @@ namespace Primal {
     public class Entity {
 
         /// <summary>
-        /// Bool to keep track of whether the entity has been disposed before.
-        /// </summary>
-        internal bool IsDisposed { get; private set; }
-
-        /// <summary>
         /// The event that gets called when the components of this entity change.
         /// </summary>
         internal event Action<Entity> ComponentsChanged;
@@ -112,7 +107,6 @@ namespace Primal {
             }
             components.Clear();
             ComponentsChanged = null;
-            IsDisposed = true;
         }
 
         /// <summary>

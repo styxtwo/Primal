@@ -29,7 +29,7 @@ namespace Primal.Tests {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
 
-            world.AddEntity(CreateEntity());
+            world.CreateEntity();
             Assert.AreEqual(1, system.EntityAddedCalled);
 
             world.Update(0);
@@ -45,9 +45,7 @@ namespace Primal.Tests {
         public void TestMethodsCalled_OneEntityRemoved() {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
-            Entity entity = CreateEntity();
-
-            world.AddEntity(entity);
+            Entity entity = world.CreateEntity();
             world.RemoveEntity(entity);
 
             Assert.AreEqual(1, system.EntityAddedCalled);
@@ -66,9 +64,7 @@ namespace Primal.Tests {
         public void TestMethodsCalled_TwoUpdates() {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
-            Entity entity = CreateEntity();
-
-            world.AddEntity(entity);
+            Entity entity = world.CreateEntity();
 
             world.Update(0);
             world.Update(0);
@@ -84,11 +80,8 @@ namespace Primal.Tests {
         public void TestMethodsCalled_TwoUpdates_TwoEntities() {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
-            Entity entity = CreateEntity();
-            Entity entity2 = CreateEntity();
-
-            world.AddEntity(entity);
-            world.AddEntity(entity2);
+            Entity entity = world.CreateEntity();
+            Entity entity2 = world.CreateEntity();
 
             world.Update(0);
 
@@ -113,11 +106,8 @@ namespace Primal.Tests {
         public void TestMethodsCalled_FiveUpdates_TwoEntities() {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
-            Entity entity = CreateEntity();
-            Entity entity2 = CreateEntity();
-
-            world.AddEntity(entity);
-            world.AddEntity(entity2);
+            Entity entity = world.CreateEntity();
+            Entity entity2 = world.CreateEntity();
 
             world.Update(0);
             world.Update(0);

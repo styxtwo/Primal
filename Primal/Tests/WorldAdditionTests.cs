@@ -12,32 +12,22 @@ namespace Primal.Tests {
         [TestMethod]
         public void TestEntityAddition() {
             IWorld world = CreateWorld();
-            Entity entity = CreateEntity(new ComponentA());
 
-            world.AddEntity(entity);
-
-            Assert.AreEqual(1, world.DebugInfo.TotalEntityCount);
-        }
-
-        [TestMethod]
-        public void TestEntityDoubleAddition() {
-            IWorld world = CreateWorld();
-            Entity entity = CreateEntity(new ComponentA());
-
-            world.AddEntity(entity);
-            world.AddEntity(entity);
+            Entity entity = world.CreateEntity();
+            AddComponents(entity, new ComponentA());
 
             Assert.AreEqual(1, world.DebugInfo.TotalEntityCount);
         }
-
+        
         [TestMethod]
         public void TestEntityDifferentDoubleAddition() {
             IWorld world = CreateWorld();
-            Entity entity = CreateEntity(new ComponentA());
-            Entity entity2 = CreateEntity(new ComponentA());
 
-            world.AddEntity(entity);
-            world.AddEntity(entity2);
+            Entity entity = world.CreateEntity();
+            Entity entity2 = world.CreateEntity();
+
+            AddComponents(entity, new ComponentA());
+            AddComponents(entity2, new ComponentA());
 
             Assert.AreEqual(2, world.DebugInfo.TotalEntityCount);
         }
@@ -45,9 +35,9 @@ namespace Primal.Tests {
         [TestMethod]
         public void TestEntityRemoval() {
             IWorld world = CreateWorld();
-            Entity entity = CreateEntity(new ComponentA());
 
-            world.AddEntity(entity);
+            Entity entity = world.CreateEntity();
+            AddComponents(entity, new ComponentA());
             world.RemoveEntity(entity);
 
             Assert.AreEqual(0, world.DebugInfo.TotalEntityCount);
@@ -56,9 +46,10 @@ namespace Primal.Tests {
         [TestMethod]
         public void TestEntityDoubleRemoval() {
             IWorld world = CreateWorld();
-            Entity entity = CreateEntity(new ComponentA());
 
-            world.AddEntity(entity);
+            Entity entity = world.CreateEntity();
+            AddComponents(entity, new ComponentA());
+
             world.RemoveEntity(entity);
             world.RemoveEntity(entity);
 
@@ -68,11 +59,12 @@ namespace Primal.Tests {
         [TestMethod]
         public void TestDoubleEntitySingleRemoval() {
             IWorld world = CreateWorld();
-            Entity entity = CreateEntity(new ComponentA());
-            Entity entity2 = CreateEntity(new ComponentA());
+            Entity entity = world.CreateEntity();
+            Entity entity2 = world.CreateEntity();
 
-            world.AddEntity(entity);
-            world.AddEntity(entity2);
+            AddComponents(entity, new ComponentA());
+            AddComponents(entity2, new ComponentA());
+
             world.RemoveEntity(entity2);
 
             Assert.AreEqual(1, world.DebugInfo.TotalEntityCount);

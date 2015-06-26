@@ -22,11 +22,10 @@ namespace Primal {
             systems.Add(system, entities.Find(system.KeyComponents));
         }
 
-        public void AddEntity(Entity entity) {
-            if (entity.IsDisposed) {
-                throw (new ArgumentException("Can't add disposed entity."));
-            }
+        public Entity CreateEntity() {
+            Entity entity = new Entity();
             entities.Add(entity);
+            return entity;
         }
 
         public void RemoveEntity(Entity entity) {
