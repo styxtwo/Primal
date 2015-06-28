@@ -1,5 +1,6 @@
 ﻿using Primal.Api;
 using System;
+using System.Collections.Generic;
 
 namespace Primal {
     /// <summary>
@@ -33,8 +34,12 @@ namespace Primal {
             entity.Dispose();
         }
 
-        public void Update(double elapsedMs) {
-            systems.Update(elapsedMs);
+        public void Update(double elapsedMs, params Type[] excluded) {
+            systems.Update(elapsedMs, excluded);
+        }
+
+        public void Update<T>(double elapsedMs) {
+            systems.Update<T>(elapsedMs);
         }
 
         public IFinder EntityFinder {

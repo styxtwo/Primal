@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Collections.Generic;
 namespace Primal.Api {
 
     /// <summary>
@@ -38,6 +40,14 @@ namespace Primal.Api {
         /// Updates the world, which in turn updates the systems, which work on the entities.
         /// </summary>
         /// <param name="elapsedMs">The elapsed milliseconds since the last update. </param>
-        void Update(double elapsedMs);
+        /// <param name="excluded">the types of the systems that are not updated.</param>
+        void Update(double elapsedMs, params Type[] excluded);
+
+        /// <summary>
+        /// Updates a specific system.
+        /// </summary>
+        /// <param name="elapsedMs">The elapsed milliseconds since the last update. </param>
+        /// <typeparam name="T">The type to update.</typeparam>
+        void Update<T>(double elapsedMs);
     }
 }

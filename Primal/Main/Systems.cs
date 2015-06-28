@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Utilities.Extensions;
 
 namespace Primal {
@@ -32,8 +33,17 @@ namespace Primal {
             return true;
         }
 
-        internal void Update(double elapsedMs) {
+        internal void Update(double elapsedMs, params Type[] excluded) {
             foreach (SystemWrapper system in systems.Values) {
+                if (!excluded.Contains(system.System.GetType())) {
+                    system.Update(elapsedMs);
+                }
+            }
+        }
+
+        internal void Update<T>(double elapsedMs) {
+            SystemWrapper system;
+            if (systems.TryGetValue(typeof(T), out system)) {
                 system.Update(elapsedMs);
             }
         }

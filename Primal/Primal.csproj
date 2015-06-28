@@ -62,6 +62,7 @@
     <Compile Include="Tests\Mocks\SystemBC.cs" />
     <Compile Include="Tests\Mocks\SystemB.cs" />
     <Compile Include="Tests\Mocks\SystemA.cs" />
+    <Compile Include="Tests\Mocks\SystemU.cs" />
     <Compile Include="Tests\Mocks\UpdatableSystem.cs" />
     <Compile Include="Tests\SystemTest.cs" />
     <Compile Include="Tests\WorldEntityTests.cs" />
