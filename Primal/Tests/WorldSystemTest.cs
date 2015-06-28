@@ -113,7 +113,7 @@ namespace Primal.Tests {
             SystemU u = new SystemU();
             world.AddSystem(u);
 
-            world.Update(1);
+            world.UpdateAll(1);
             Assert.AreEqual(true, u.IsUpdated, "Expect U to be updated.");
         }
 
@@ -123,7 +123,7 @@ namespace Primal.Tests {
             SystemU u = new SystemU();
             world.AddSystem(u);
 
-            world.Update(1, typeof(SystemU));
+            world.UpdateAll(1, typeof(SystemU));
             Assert.AreEqual(false, u.IsUpdated, "Expect U to be excluded, and thus not updated.");
         }
 

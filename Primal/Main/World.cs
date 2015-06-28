@@ -34,7 +34,7 @@ namespace Primal {
             entity.Dispose();
         }
 
-        public void Update(double elapsedMs, params Type[] excluded) {
+        public void UpdateAll(double elapsedMs, params Type[] excluded) {
             systems.Update(elapsedMs, excluded);
         }
 

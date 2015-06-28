@@ -15,7 +15,7 @@ namespace Primal.Tests {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
 
-            world.Update(0);
+            world.UpdateAll(0);
 
             Assert.AreEqual(0, system.EntityAddedCalled);
             Assert.AreEqual(0, system.EntityRemovedCalled);
@@ -32,7 +32,7 @@ namespace Primal.Tests {
             world.CreateEntity();
             Assert.AreEqual(1, system.EntityAddedCalled);
 
-            world.Update(0);
+            world.UpdateAll(0);
 
             Assert.AreEqual(1, system.EntityAddedCalled);
             Assert.AreEqual(0, system.EntityRemovedCalled);
@@ -51,7 +51,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, system.EntityAddedCalled);
             Assert.AreEqual(1, system.EntityRemovedCalled);
 
-            world.Update(0);
+            world.UpdateAll(0);
 
             Assert.AreEqual(1, system.EntityAddedCalled);
             Assert.AreEqual(1, system.EntityRemovedCalled);
@@ -66,8 +66,8 @@ namespace Primal.Tests {
             IWorld world = CreateWorld(system);
             Entity entity = world.CreateEntity();
 
-            world.Update(0);
-            world.Update(0);
+            world.UpdateAll(0);
+            world.UpdateAll(0);
 
             Assert.AreEqual(1, system.EntityAddedCalled);
             Assert.AreEqual(0, system.EntityRemovedCalled);
@@ -83,7 +83,7 @@ namespace Primal.Tests {
             Entity entity = world.CreateEntity();
             Entity entity2 = world.CreateEntity();
 
-            world.Update(0);
+            world.UpdateAll(0);
 
             Assert.AreEqual(2, system.EntityAddedCalled);
             Assert.AreEqual(0, system.EntityRemovedCalled);
@@ -92,7 +92,7 @@ namespace Primal.Tests {
             Assert.AreEqual(2, system.UpdateEntityCalled);
 
             world.RemoveEntity(entity2);
-            world.Update(0);
+            world.UpdateAll(0);
 
             Assert.AreEqual(2, system.EntityAddedCalled);
             Assert.AreEqual(1, system.EntityRemovedCalled);
@@ -109,11 +109,11 @@ namespace Primal.Tests {
             Entity entity = world.CreateEntity();
             Entity entity2 = world.CreateEntity();
 
-            world.Update(0);
-            world.Update(0);
-            world.Update(0);
-            world.Update(0);
-            world.Update(0);
+            world.UpdateAll(0);
+            world.UpdateAll(0);
+            world.UpdateAll(0);
+            world.UpdateAll(0);
+            world.UpdateAll(0);
 
             Assert.AreEqual(2, system.EntityAddedCalled);
             Assert.AreEqual(0, system.EntityRemovedCalled);

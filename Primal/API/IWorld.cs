@@ -41,7 +41,7 @@ namespace Primal.Api {
         /// </summary>
         /// <param name="elapsedMs">The elapsed milliseconds since the last update. </param>
         /// <param name="excluded">the types of the systems that are not updated.</param>
-        void Update(double elapsedMs, params Type[] excluded);
+        void UpdateAll(double elapsedMs, params Type[] excluded);
 
         /// <summary>
         /// Updates a specific system.
