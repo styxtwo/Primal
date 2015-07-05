@@ -16,6 +16,15 @@ namespace Primal {
         protected internal IWorld World { get; set; }
 
         /// <summary>
+        /// Reference the entity finder of the world.
+        /// </summary>
+        protected internal IFinder Finder {
+            get {
+                return World.EntityFinder;
+            }
+        }
+
+        /// <summary>
         /// Collection of the components an entity needs for the system to act on it.
         /// </summary>
         internal ICollection<Type> KeyComponents { get; set; }

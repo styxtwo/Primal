@@ -1,4 +1,5 @@
 ﻿using Primal.Api;
+using Primal.Main;
 using System;
 using System.Collections.Generic;
 
@@ -20,7 +21,7 @@ namespace Primal {
 
         public void AddSystem(BaseSystem system) {
             system.World = this;
-            systems.Add(system, entities.Find(system.KeyComponents));
+            systems.Add(system, entities.EntityFinder.Find(system.KeyComponents));
         }
 
         public Entity CreateEntity() {
@@ -44,7 +45,7 @@ namespace Primal {
 
         public IFinder EntityFinder {
             get {
-                return entities;
+                return entities.EntityFinder;
             }
         }
     }

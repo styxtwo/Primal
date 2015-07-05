@@ -4,15 +4,56 @@ using System.Collections.Generic;
 namespace Primal.Api {
 
     /// <summary>
-    /// Provides a class that searches the list of entities for entities with specific components.
+    /// Provides a class that searches the full list of entities for entities with specific components.
     /// </summary>
     public interface IFinder {
 
         /// <summary>
         /// Finds the entities that contain the correct components.
         /// </summary>
-        /// <param name="components">The components that the entities should contain. </param>
-        /// <returns>The collection of entities. </returns>
-        IEnumerable<Entity> Find(IEnumerable<Type> components);
+        /// <typeparam name="T">The component that the entities should contain. </typeparam>
+        /// <returns>The entities with the correct components. </returns>
+        IEnumerable<Entity> Find<T>();
+
+        /// <summary>
+        /// Finds the entities that contain the correct components.
+        /// </summary>
+        /// <typeparam name="T">A component that the entities should contain. </typeparam>
+        /// <typeparam name="U">A component that the entities should contain. </typeparam>
+        /// <returns>The entities with the correct components. </returns>
+        IEnumerable<Entity> Find<T, U>();
+
+        /// <summary>
+        /// Finds the entities that contain the correct components.
+        /// </summary>
+        /// <typeparam name="T">A component that the entities should contain. </typeparam>
+        /// <typeparam name="U">A component that the entities should contain. </typeparam>
+        /// <typeparam name="V">A component that the entities should contain. </typeparam>
+        /// <returns>The entities with the correct components. </returns>
+        IEnumerable<Entity> Find<T, U, V>();
+
+        /// <summary>
+        /// Finds the first entity that contain the correct components.
+        /// </summary>
+        /// <typeparam name="T">The component that the entity should contain. </typeparam>
+        /// <returns>The first entity with the correct components. </returns>
+        Entity FindFirst<T>();
+
+        /// <summary>
+        /// Finds the first entity that contain the correct components.
+        /// </summary>
+        /// <typeparam name="T">A component that the entity should contain. </typeparam>
+        /// <typeparam name="U">A component that the entity should contain. </typeparam>
+        /// <returns>The first entity with the correct components. </returns>
+        Entity FindFirst<T, U>();
+
+        /// <summary>
+        /// Finds the first entity that contain the correct components.
+        /// </summary>
+        /// <typeparam name="T">A component that the entity should contain. </typeparam>
+        /// <typeparam name="U">A component that the entity should contain. </typeparam>
+        /// <typeparam name="V">A component that the entity should contain. </typeparam>
+        /// <returns>The first entity with the correct components. </returns>
+        Entity FindFirst<T, U, V>();
     }
 }

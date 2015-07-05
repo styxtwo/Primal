@@ -46,6 +46,7 @@
     <Compile Include="Api\Component.cs" />
     <Compile Include="Api\BaseSystem.cs" />
     <Compile Include="Api\IWorld.cs" />
+    <Compile Include="Main\EntityFinder.cs" />
     <Compile Include="Main\SystemWrapper.cs" />
     <Compile Include="Api\Entity.cs" />
     <Compile Include="Main\Entities.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Main\World.cs" />
     <Compile Include="Tests\BaseTests.cs" />
     <Compile Include="Tests\EntityTests.cs" />
+    <Compile Include="Tests\FinderTests.cs" />
     <Compile Include="Tests\Mocks\ComponentC.cs" />
     <Compile Include="Tests\Mocks\ComponentB.cs" />
     <Compile Include="Tests\Mocks\ComponentA.cs" />
