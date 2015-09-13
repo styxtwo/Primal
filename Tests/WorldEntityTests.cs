@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Primal.Api;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Primal.Tests {
-    [TestClass]
+    [TestFixture]
     public class WorldEntityTests : BaseTests {
         BaseSystem systemA;
         BaseSystem systemBC;
@@ -21,7 +21,7 @@ namespace Primal.Tests {
             info = world.DebugInfo;
         }
 
-        [TestMethod]
+        [Test]
         public void TestComponentAddition() {
             Setup();
 
@@ -68,7 +68,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, info.EntityCount(systemBC));
         }
 
-        [TestMethod]
+        [Test]
         public void TestEntityDisposedOnRemoval() {
             Setup();
 

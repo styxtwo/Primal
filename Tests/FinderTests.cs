@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Primal.Api;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Primal.Tests {
-    [TestClass]
+    [TestFixture]
     public class FinderTests : BaseTests {
 
         IFinder finder;
@@ -42,7 +42,7 @@ namespace Primal.Tests {
             entity.Add(new ComponentB());
         }
 
-        [TestMethod]
+        [Test]
         public void TestFindAll_OneComponent() {
             Setup();
 
@@ -53,7 +53,7 @@ namespace Primal.Tests {
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestFindAll_MultipleComponent() {
             Setup();
 
@@ -65,7 +65,7 @@ namespace Primal.Tests {
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestFindAll_None() {
             Setup();
 
@@ -73,7 +73,7 @@ namespace Primal.Tests {
             Assert.AreEqual(entities.Count(), 0, "Expect no entities with Component C");
         }
 
-        [TestMethod]
+        [Test]
         public void TestFindFirst_OneComponent() {
             Setup();
 
@@ -82,7 +82,7 @@ namespace Primal.Tests {
             Assert.IsTrue(entity.Contains<ComponentA>(), "Expect to contains Component A");
         }
 
-        [TestMethod]
+        [Test]
         public void TestFindFirst_TwoComponents() {
             Setup();
 
@@ -92,7 +92,7 @@ namespace Primal.Tests {
             Assert.IsTrue(entity.Contains<ComponentB>(), "Expect to contains Component B");
         }
 
-        [TestMethod]
+        [Test]
         public void TestFindFirst_None() {
             Setup();
 

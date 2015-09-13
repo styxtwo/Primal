@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Primal.Api;
 
 namespace Primal.Tests {
-    [TestClass]
+    [TestFixture]
     public class WorldSystemTests : BaseTests{
         BaseSystem systemO;
         BaseSystem systemA;
@@ -20,7 +20,7 @@ namespace Primal.Tests {
             info = world.DebugInfo;
         }
 
-        [TestMethod]
+        [Test]
         public void TestEntityAddition() {
             Setup();
 
@@ -32,7 +32,7 @@ namespace Primal.Tests {
             Assert.AreEqual(0, info.EntityCount(systemBC));
         }
 
-        [TestMethod]
+        [Test]
         public void TestEntityRemoval() {
             Setup();
 
@@ -46,7 +46,7 @@ namespace Primal.Tests {
             Assert.AreEqual(0, info.EntityCount(systemBC));
         }
 
-        [TestMethod]
+        [Test]
         public void TestMultipleEntities() {
             Setup();
 
@@ -60,7 +60,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, info.EntityCount(systemBC));
         }
 
-        [TestMethod]
+        [Test]
         public void TestMoreMultipleEntities() {
             Setup();
             Entity entity = world.CreateEntity();
@@ -81,7 +81,7 @@ namespace Primal.Tests {
             Assert.AreEqual(2, info.EntityCount(systemBC));
         }
 
-        [TestMethod]
+        [Test]
         public void TestSystemAddedAfterEntity() {
             world = CreateWorld();
             info = world.DebugInfo;
@@ -107,7 +107,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, info.EntityCount(systemBC));
         }
 
-        [TestMethod]
+        [Test]
         public void TestSystemUpdate() {
             world = CreateWorld();
             SystemU u = new SystemU();
@@ -117,7 +117,7 @@ namespace Primal.Tests {
             Assert.AreEqual(true, u.IsUpdated, "Expect U to be updated.");
         }
 
-        [TestMethod]
+        [Test]
         public void TestSystemExcludedUpdate() {
             world = CreateWorld();
             SystemU u = new SystemU();
@@ -127,7 +127,7 @@ namespace Primal.Tests {
             Assert.AreEqual(false, u.IsUpdated, "Expect U to be excluded, and thus not updated.");
         }
 
-        [TestMethod]
+        [Test]
         public void TestSystemUpdateSingle() {
             world = CreateWorld();
             SystemU u = new SystemU();
@@ -137,7 +137,7 @@ namespace Primal.Tests {
             Assert.AreEqual(true, u.IsUpdated, "Expect U to be updated.");
         }
 
-        [TestMethod]
+        [Test]
         public void TestSystemUpdateSingleOther() {
             world = CreateWorld();
             SystemU u = new SystemU();

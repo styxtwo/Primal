@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Primal.Api;
 using System;
 using System.Collections.Generic;
@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Primal.Tests {
-    [TestClass]
+    [TestFixture]
     public class WorldAdditionTests : BaseTests {
-        [TestMethod]
+        [Test]
         public void TestEntityAddition() {
             IWorld world = CreateWorld();
 
@@ -19,7 +19,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, world.DebugInfo.TotalEntityCount);
         }
         
-        [TestMethod]
+        [Test]
         public void TestEntityDifferentDoubleAddition() {
             IWorld world = CreateWorld();
 
@@ -32,7 +32,7 @@ namespace Primal.Tests {
             Assert.AreEqual(2, world.DebugInfo.TotalEntityCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestEntityRemoval() {
             IWorld world = CreateWorld();
 
@@ -43,7 +43,7 @@ namespace Primal.Tests {
             Assert.AreEqual(0, world.DebugInfo.TotalEntityCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestEntityDoubleRemoval() {
             IWorld world = CreateWorld();
 
@@ -56,7 +56,7 @@ namespace Primal.Tests {
             Assert.AreEqual(0, world.DebugInfo.TotalEntityCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestDoubleEntitySingleRemoval() {
             IWorld world = CreateWorld();
             Entity entity = world.CreateEntity();
@@ -70,7 +70,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, world.DebugInfo.TotalEntityCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestSystemAddition() {
             IWorld world = CreateWorld();
 
@@ -79,7 +79,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, world.DebugInfo.TotalSystemCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestDoubleSystemAddition() {
             IWorld world = CreateWorld();
 
@@ -89,7 +89,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, world.DebugInfo.TotalSystemCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestDoubleSameSystemAddition() {
             IWorld world = CreateWorld();
             BaseSystem system = new SystemA();
@@ -100,7 +100,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, world.DebugInfo.TotalSystemCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestDifferentDoubleSystemAddition() {
             IWorld world = CreateWorld();
 

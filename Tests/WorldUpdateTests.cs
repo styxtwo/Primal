@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Primal.Api;
 using System;
 using System.Collections.Generic;
@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Primal.Tests {
-    [TestClass]
+    [TestFixture]
     public class WorldUpdateTests : BaseTests {
 
-        [TestMethod]
+        [Test]
         public void TestMethodsCalled_NoEntity() {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
@@ -24,7 +24,7 @@ namespace Primal.Tests {
             Assert.AreEqual(0, system.UpdateEntityCalled);
         }
 
-        [TestMethod]
+        [Test]
         public void TestMethodsCalled_OneEntity() {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
@@ -41,7 +41,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, system.UpdateEntityCalled);
         }
 
-        [TestMethod]
+        [Test]
         public void TestMethodsCalled_OneEntityRemoved() {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
@@ -60,7 +60,7 @@ namespace Primal.Tests {
             Assert.AreEqual(0, system.UpdateEntityCalled);
         }
 
-        [TestMethod]
+        [Test]
         public void TestMethodsCalled_TwoUpdates() {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
@@ -76,7 +76,7 @@ namespace Primal.Tests {
             Assert.AreEqual(2, system.UpdateEntityCalled);
         }
 
-        [TestMethod]
+        [Test]
         public void TestMethodsCalled_TwoUpdates_TwoEntities() {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);
@@ -102,7 +102,7 @@ namespace Primal.Tests {
         }
 
 
-        [TestMethod]
+        [Test]
         public void TestMethodsCalled_FiveUpdates_TwoEntities() {
             UpdatableSystem system = new UpdatableSystem();
             IWorld world = CreateWorld(system);

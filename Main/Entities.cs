@@ -17,7 +17,6 @@ namespace Primal {
         public Entities() {
             entities = new HashSet<Entity>();
             EntityFinder = new EntityFinder(entities);
-            System.Diagnostics.Debug.WriteLine("Definitely starts!");
         }
 
         public void Add(Entity entity) {

@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,17 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Primal.Tests {
-    [TestClass]
+    [TestFixture]
     public class EntityTests {
 
-        [TestMethod]
+        [Test]
         public void TestComponentAdding() {
             Entity entity = new Entity();
             entity.Add(new ComponentA());
             Assert.AreEqual(1, entity.ComponentCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestComponentRemoval() {
             Entity entity = new Entity();
             entity.Add(new ComponentA());
@@ -24,7 +24,7 @@ namespace Primal.Tests {
             Assert.AreEqual(0, entity.ComponentCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestComponentDoubleAddition() {
             Entity entity = new Entity();
             entity.Add(new ComponentA());
@@ -32,7 +32,7 @@ namespace Primal.Tests {
             Assert.AreEqual(1, entity.ComponentCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestComponentDoubleRemoval() {
             Entity entity = new Entity();
             entity.Add(new ComponentA());
@@ -41,7 +41,7 @@ namespace Primal.Tests {
             Assert.AreEqual(0, entity.ComponentCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestTwoComponentAddition() {
             Entity entity = new Entity();
             entity.Add(new ComponentA());
@@ -49,7 +49,7 @@ namespace Primal.Tests {
             Assert.AreEqual(2, entity.ComponentCount);
         }
 
-        [TestMethod]
+        [Test]
         public void TestContains() {
             Entity entity = new Entity();
             entity.Add(new ComponentA());
