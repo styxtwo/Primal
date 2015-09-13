@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+    <metadata>
+        <id>Primal</id>
+        <version>1.0.0</version>
+        <titlePrimal ECS Framework</title>
+        <authors>Ruben Zoet</authors>
+        <owners>Ruben Zoet</owners>
+        <licenseUrl>https://raw.githubusercontent.com/styxtwo/Primal/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/styxtwo/Primal</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Entity Component System (ECS) framework. Can be used for games and other projects where composition is favored over inheritance.</description>
+        <summary />
+        <tags>primal entity component system framework ecs composition</tags>
+        <dependencies> 
+            <dependency id="NUnit" version="2.6.4" />
+            <dependency id="Styxtwo-Utilities" version="1.0.0" />
+        </dependencies> 
+    </metadata>
+    <files>
+        <file src="bin/Release/Primal.dll" target="lib/Primal.dll" />
+    </files>
+</package>
