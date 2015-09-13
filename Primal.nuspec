@@ -3,7 +3,7 @@
     <metadata>
         <id>Primal</id>
         <version>1.0.0</version>
-        <titlePrimal ECS Framework</title>
+        <title>Primal ECS Framework</title>
         <authors>Ruben Zoet</authors>
         <owners>Ruben Zoet</owners>
         <licenseUrl>https://raw.githubusercontent.com/styxtwo/Primal/master/LICENSE</licenseUrl>
