@@ -9,7 +9,7 @@
         <licenseUrl>https://raw.githubusercontent.com/styxtwo/Primal/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/styxtwo/Primal</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Entity Component System (ECS) framework. Can be used for games and other projects where composition is favored over inheritance.</description>
+        <description>Entity Component System (ECS) framework. Can be used for games and other projects where composition is favored over inheritance. Github project can be found here: https://github.com/styxtwo/Primal</description>
         <summary />
         <tags>primal entity component system framework ecs composition</tags>
         <dependencies> 
