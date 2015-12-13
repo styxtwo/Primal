@@ -8,9 +8,9 @@ namespace Primal {
     /// Hides system implementation from the API users.
     /// </summary>
     class SystemWrapper {
-        public BaseSystem System { get; private set; }
+        public AbstractSystem System { get; private set; }
         private IList<Entity> entities;
-        public SystemWrapper(BaseSystem system) {
+        public SystemWrapper(AbstractSystem system) {
             System = system;
             entities = new List<Entity>();
         }

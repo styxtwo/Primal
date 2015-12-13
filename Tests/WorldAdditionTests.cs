@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestFixture]
-    public class WorldAdditionTests : BaseTests {
+    class WorldAdditionTests : BaseTests {
         [Test]
         public void TestEntityAddition() {
-            IWorld world = CreateWorld();
+            IPrimalWorld world = CreateWorld();
 
-            Entity entity = world.CreateEntity();
+            IEntity entity = world.CreateEntity();
             AddComponents(entity, new ComponentA());
 
             Assert.AreEqual(1, world.DebugInfo.TotalEntityCount);
@@ -21,10 +21,10 @@ namespace Primal.Tests {
         
         [Test]
         public void TestEntityDifferentDoubleAddition() {
-            IWorld world = CreateWorld();
+            IPrimalWorld world = CreateWorld();
 
-            Entity entity = world.CreateEntity();
-            Entity entity2 = world.CreateEntity();
+            IEntity entity = world.CreateEntity();
+            IEntity entity2 = world.CreateEntity();
 
             AddComponents(entity, new ComponentA());
             AddComponents(entity2, new ComponentA());
@@ -34,9 +34,9 @@ namespace Primal.Tests {
 
         [Test]
         public void TestEntityRemoval() {
-            IWorld world = CreateWorld();
+            IPrimalWorld world = CreateWorld();
 
-            Entity entity = world.CreateEntity();
+            IEntity entity = world.CreateEntity();
             AddComponents(entity, new ComponentA());
             world.RemoveEntity(entity);
 
@@ -45,9 +45,9 @@ namespace Primal.Tests {
 
         [Test]
         public void TestEntityDoubleRemoval() {
-            IWorld world = CreateWorld();
+            IPrimalWorld world = CreateWorld();
 
-            Entity entity = world.CreateEntity();
+            IEntity entity = world.CreateEntity();
             AddComponents(entity, new ComponentA());
 
             world.RemoveEntity(entity);
@@ -58,9 +58,9 @@ namespace Primal.Tests {
 
         [Test]
         public void TestDoubleEntitySingleRemoval() {
-            IWorld world = CreateWorld();
-            Entity entity = world.CreateEntity();
-            Entity entity2 = world.CreateEntity();
+            IPrimalWorld world = CreateWorld();
+            IEntity entity = world.CreateEntity();
+            IEntity entity2 = world.CreateEntity();
 
             AddComponents(entity, new ComponentA());
             AddComponents(entity2, new ComponentA());
@@ -72,7 +72,7 @@ namespace Primal.Tests {
 
         [Test]
         public void TestSystemAddition() {
-            IWorld world = CreateWorld();
+            IPrimalWorld world = CreateWorld();
 
             world.AddSystem(new SystemA());
 
@@ -81,7 +81,7 @@ namespace Primal.Tests {
 
         [Test]
         public void TestDoubleSystemAddition() {
-            IWorld world = CreateWorld();
+            IPrimalWorld world = CreateWorld();
 
             world.AddSystem(new SystemA());
             world.AddSystem(new SystemA());
@@ -91,7 +91,7 @@ namespace Primal.Tests {
 
         [Test]
         public void TestDoubleSameSystemAddition() {
-            IWorld world = CreateWorld();
+            IPrimalWorld world = CreateWorld();
             BaseSystem system = new SystemA();
 
             world.AddSystem(system);
@@ -102,7 +102,7 @@ namespace Primal.Tests {
 
         [Test]
         public void TestDifferentDoubleSystemAddition() {
-            IWorld world = CreateWorld();
+            IPrimalWorld world = CreateWorld();
 
             world.AddSystem(new SystemA());
             world.AddSystem(new SystemB());

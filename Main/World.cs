@@ -7,7 +7,7 @@ namespace Primal {
     /// <summary>
     /// Implementation of the IWorld interface.
     /// </summary>
-    class World : IWorld {
+    class World : IPrimalWorld {
         public IDebugInfo DebugInfo { get; private set; }
 
         private Entities entities;
@@ -20,28 +20,37 @@ namespace Primal {
         }
 
         public void AddSystem(BaseSystem system) {
-            system.World = this;
+            system.Finder = this.EntityFinder;
             systems.Add(system, entities.EntityFinder.Find(system.KeyComponents));
         }
 
-        public Entity CreateEntity() {
+        public void AddSystem(DrawSystem system) {
+            system.Finder = this.EntityFinder;
+            systems.Add(system, entities.EntityFinder.Find(system.KeyComponents));
+        }
+
+        public IEntity CreateEntity() {
             Entity entity = new Entity();
             entities.Add(entity);
             return entity;
         }
 
-        public void RemoveEntity(Entity entity) {
-            entities.Remove(entity);
-            entity.Dispose();
+        public void RemoveEntity(IEntity entity) {
+            Entity converted_entity = entity as Entity;
+            if (converted_entity != null) {
+                converted_entity.Dispose();
+                entities.Remove(converted_entity);
+            }
         }
 
-        public void UpdateAll(double elapsedMs, params Type[] excluded) {
-            systems.Update(elapsedMs, excluded);
+        public void Update(double elapsedMs) {
+            systems.Update(elapsedMs);
         }
 
-        public void Update<T>(double elapsedMs) {
-            systems.Update<T>(elapsedMs);
+        public void Draw(double elapsedMs) {
+            systems.Draw(elapsedMs);
         }
+
 
         public IFinder EntityFinder {
             get {

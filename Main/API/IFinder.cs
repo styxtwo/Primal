@@ -13,7 +13,7 @@ namespace Primal.Api {
         /// </summary>
         /// <typeparam name="T">The component that the entities should contain. </typeparam>
         /// <returns>The entities with the correct components. </returns>
-        IEnumerable<Entity> Find<T>();
+        IEnumerable<IEntity> Find<T>();
 
         /// <summary>
         /// Finds the entities that contain the correct components.
@@ -21,7 +21,7 @@ namespace Primal.Api {
         /// <typeparam name="T">A component that the entities should contain. </typeparam>
         /// <typeparam name="U">A component that the entities should contain. </typeparam>
         /// <returns>The entities with the correct components. </returns>
-        IEnumerable<Entity> Find<T, U>();
+        IEnumerable<IEntity> Find<T, U>();
 
         /// <summary>
         /// Finds the entities that contain the correct components.
@@ -30,14 +30,14 @@ namespace Primal.Api {
         /// <typeparam name="U">A component that the entities should contain. </typeparam>
         /// <typeparam name="V">A component that the entities should contain. </typeparam>
         /// <returns>The entities with the correct components. </returns>
-        IEnumerable<Entity> Find<T, U, V>();
+        IEnumerable<IEntity> Find<T, U, V>();
 
         /// <summary>
         /// Finds the first entity that contain the correct components.
         /// </summary>
         /// <typeparam name="T">The component that the entity should contain. </typeparam>
         /// <returns>The first entity with the correct components. </returns>
-        Entity FindFirst<T>();
+        IEntity FindFirst<T>();
 
         /// <summary>
         /// Finds the first entity that contain the correct components.
@@ -45,7 +45,7 @@ namespace Primal.Api {
         /// <typeparam name="T">A component that the entity should contain. </typeparam>
         /// <typeparam name="U">A component that the entity should contain. </typeparam>
         /// <returns>The first entity with the correct components. </returns>
-        Entity FindFirst<T, U>();
+        IEntity FindFirst<T, U>();
 
         /// <summary>
         /// Finds the first entity that contain the correct components.
@@ -54,6 +54,6 @@ namespace Primal.Api {
         /// <typeparam name="U">A component that the entity should contain. </typeparam>
         /// <typeparam name="V">A component that the entity should contain. </typeparam>
         /// <returns>The first entity with the correct components. </returns>
-        Entity FindFirst<T, U, V>();
+        IEntity FindFirst<T, U, V>();
     }
 }

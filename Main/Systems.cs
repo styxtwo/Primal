@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Primal.Api;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Utilities.Extensions;
@@ -8,77 +9,101 @@ namespace Primal {
     /// Provides a collection for the systems.
     /// </summary>
     class Systems {
-        public event Action<BaseSystem> SystemAdded;
-        private IDictionary<Type, SystemWrapper> systems;
+        private IDictionary<Type, SystemWrapper> updateSystems;
+        private IDictionary<Type, SystemWrapper> drawSystems;
 
         public Systems(Entities entities) {
-            systems = new Dictionary<Type, SystemWrapper>();
+            updateSystems = new Dictionary<Type, SystemWrapper>();
+            drawSystems = new Dictionary<Type, SystemWrapper>();
             entities.EntityAdded += EntityAdded;
             entities.EntityRemoved += EntityRemoved;
             entities.EntityChanged += EntityChanged;
         }
 
-        public bool Add(BaseSystem system, IEnumerable<Entity> existingEntities) {
-            if (systems.ContainsKey(system.GetType())) {
+        //-- Addition methods --//
+        public bool Add(BaseSystem system, IEnumerable<IEntity> existingEntities) {
+            return Add(system, existingEntities, updateSystems);
+        }
+
+        public bool Add(DrawSystem system, IEnumerable<IEntity> existingEntities) {
+            return Add(system, existingEntities, drawSystems);
+        }
+
+        public bool Add(AbstractSystem system, IEnumerable<IEntity> existingEntities, IDictionary<Type, SystemWrapper> container) {
+            if (container.ContainsKey(system.GetType())) {
                 return false;
             }
             SystemWrapper wrapper = new SystemWrapper(system);
-            systems.Add(system.GetType(), wrapper);
+            container.Add(system.GetType(), wrapper);
 
             foreach (Entity enitity in existingEntities) {
                 wrapper.AddEntity(enitity);
             }
-
-            SystemAdded.NullSafeInvoke(system);
             return true;
         }
 
-        internal void Update(double elapsedMs, params Type[] excluded) {
-            foreach (SystemWrapper system in systems.Values) {
-                if (!excluded.Contains(system.System.GetType())) {
-                    system.Update(elapsedMs);
-                }
-            }
+        //-- Update methods --//
+        internal void Update(double elapsedMs) {
+            Update(elapsedMs, updateSystems.Values);
         }
 
-        internal void Update<T>(double elapsedMs) {
-            SystemWrapper system;
-            if (systems.TryGetValue(typeof(T), out system)) {
+        internal void Draw(double elapsedMs, params Type[] excluded) {
+            Update(elapsedMs, drawSystems.Values);
+        }
+        
+        private void Update(double elapsedMs, IEnumerable<SystemWrapper> systems) {
+            foreach (SystemWrapper system in systems) {
                 system.Update(elapsedMs);
             }
         }
 
+        //-- Entity Added/Removed Methods --//
         private void EntityAdded(Entity entity) {
-            foreach (SystemWrapper system in systems.Values) {
+            foreach (SystemWrapper system in updateSystems.Values) {
                 system.AddEntity(entity);
             }
         }
 
         private void EntityRemoved(Entity entity) {
-            foreach (SystemWrapper system in systems.Values) {
+            foreach (SystemWrapper system in updateSystems.Values) {
                 system.RemoveEntity(entity);
             }
         }
 
         private void EntityChanged(Entity entity) {
-            foreach (SystemWrapper system in systems.Values) {
+            foreach (SystemWrapper system in updateSystems.Values) {
                 system.UpdateEntityValidity(entity);
             }
         }
 
-        public int GetEntityCount(BaseSystem system) {
+        //-- Debug data Methods --// 
+        public int GetEntityCount(AbstractSystem system) {
             SystemWrapper wrapper;
-            systems.TryGetValue(system.GetType(), out wrapper);
+            updateSystems.TryGetValue(system.GetType(), out wrapper);
             if (wrapper == null) {
                 throw (new ArgumentException("System not found."));
             }
             return wrapper.EntityCount;
         }
 
-        public int SystemCount {
+        public int BaseSystemCount {
             get {
-                return systems.Count;
+                return updateSystems.Count;
             }
+        }
+
+        public int DrawSystemCount {
+            get {
+                return drawSystems.Count;
+            }
+        }
+
+        public IEnumerable<Type> BaseSystems() {
+            return updateSystems.Keys;
+        }
+
+        public IEnumerable<Type> DrawSystems() {
+            return drawSystems.Keys;
         }
     }
 }

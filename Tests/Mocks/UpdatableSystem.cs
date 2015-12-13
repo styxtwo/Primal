@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Primal.Api;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,9 @@ namespace Primal.Tests {
         public int EntityAddedCalled { get; private set; }
         public int EntityRemovedCalled { get; private set; }
         protected internal override void AddKeyComponents() {
-            
         }
 
-        protected internal override void UpdateEntity(Entity entity, double elapsedMs) {
+        protected internal override void UpdateEntity(IEntity entity, double elapsedMs) {
             UpdateEntityCalled++;
         }
 
@@ -27,11 +27,11 @@ namespace Primal.Tests {
             AfterUpdateCalled++;
         }
 
-        protected internal override void EntityAdded(Entity entity) {
+        protected internal override void EntityAdded(IEntity entity) {
             EntityAddedCalled++;
         }
 
-        protected internal override void EntityRemoved(Entity entity) {
+        protected internal override void EntityRemoved(IEntity entity) {
             EntityRemovedCalled++;
         }
     }

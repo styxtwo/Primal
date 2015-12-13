@@ -1,6 +1,6 @@
 ﻿using Primal.Api;
 
-namespace Primal {
+namespace Primal.Api {
 
     /// <summary>
     /// Provides a factory for creating the World in which all objects exist.
@@ -11,7 +11,7 @@ namespace Primal {
         /// Creates the world.
         /// </summary>
         /// <returns>The world that got created. </returns>
-        public static IWorld Create() {
+        public static IPrimalWorld Create() {
             return new World();
         }
     }

@@ -17,7 +17,7 @@ namespace Primal.Main {
             this.entities = entities;
         }
 
-        public IEnumerable<Entity> Find(params Type[] components) {
+        public IEnumerable<IEntity> Find(params Type[] components) {
             IList<Entity> selected = new List<Entity>();
             foreach (Entity entity in entities) {
                 if (entity.ContainsAll(components)) {
@@ -27,35 +27,35 @@ namespace Primal.Main {
             return selected;
         }
 
-        public IEnumerable<Entity> Find(IEnumerable<Type> components) {
+        public IEnumerable<IEntity> Find(IEnumerable<Type> components) {
             return Find(components.ToArray());
         }
 
-        public IEnumerable<Entity> Find<T>() {
+        public IEnumerable<IEntity> Find<T>() {
             return Find(typeof(T));
         }
 
-        public IEnumerable<Entity> Find<T, U>() {
+        public IEnumerable<IEntity> Find<T, U>() {
             return Find(typeof(T), typeof(U));
         }
 
-        public IEnumerable<Entity> Find<T, U, V>() {
+        public IEnumerable<IEntity> Find<T, U, V>() {
             return Find(typeof(T), typeof(U), typeof(V));
         }
 
-        public Entity FindFirst(params Type[] components) {
+        public IEntity FindFirst(params Type[] components) {
             return Find(components).FirstOrDefault();
         }
 
-        public Entity FindFirst<T>() {
+        public IEntity FindFirst<T>() {
             return FindFirst(typeof(T));
         }
 
-        public Entity FindFirst<T, U>() {
+        public IEntity FindFirst<T, U>() {
             return FindFirst(typeof(T), typeof(U));
         }
 
-        public Entity FindFirst<T, U, V>() {
+        public IEntity FindFirst<T, U, V>() {
             return FindFirst(typeof(T), typeof(U), typeof(V));
         }
     }

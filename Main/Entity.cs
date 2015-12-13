@@ -9,23 +9,23 @@ namespace Primal {
     /// Provides an entity for the systems to work on. Contains a list of components. 
     /// Contains several internal methods that are not nessesary to be used by users of the Primal framework.
     /// </summary>
-    public class Entity {
+    class Entity : IEntity {
 
         /// <summary>
         /// The event that gets called when the components of this entity change.
         /// </summary>
-        internal event Action<Entity> ComponentsChanged;
+        public event Action<Entity> ComponentsChanged;
 
         /// <summary>
         /// The list of components.
         /// </summary>
-        private IDictionary<Type, Component> components;
+        private IDictionary<Type, IComponent> components;
 
         /// <summary>
         /// Constructor of the entity.
         /// </summary>
         public Entity() {
-            components = new Dictionary<Type, Component>();
+            components = new Dictionary<Type, IComponent>();
         }
 
         /// <summary>
@@ -33,7 +33,8 @@ namespace Primal {
         /// </summary>
         /// <param name="component">The component to add. </param>
         /// <returns>Whether the component was added successfully. </returns>
-        public bool Add(Component component) {
+        public bool Add(IComponent component)
+        {
             if (components.ContainsKey(component.GetType())) {
                 return false;
             }
@@ -60,8 +61,8 @@ namespace Primal {
         /// </summary>
         /// <typeparam name="T">The type of the component to return. </typeparam>
         /// <returns>The component with the parameter type. </returns>
-        public T Get<T>() where T : Component {
-            Component component;
+        public T Get<T>() where T : IComponent {
+            IComponent component;
             components.TryGetValue(typeof(T), out component);
             return (T)component;
         }
@@ -80,7 +81,7 @@ namespace Primal {
         /// </summary>
         /// <param name="type">The specific type of the component to check. </param>
         /// <returns>Whether the component is present. </returns>
-        internal bool Contains(Type type) {
+        public bool Contains(Type type) {
             return components.ContainsKey(type);
         }
 
@@ -89,7 +90,8 @@ namespace Primal {
         /// </summary>
         /// <param name="types">The list of types of the components to check. </param>
         /// <returns>Whether the entity contains all types. </returns>
-        internal bool ContainsAll(IEnumerable<Type> types) {
+        public bool ContainsAll(IEnumerable<Type> types)
+        {
             foreach (Type type in types) {
                 if (!Contains(type)) {
                     return false;
@@ -99,23 +101,22 @@ namespace Primal {
         }
 
         /// <summary>
-        /// Disposes of the Entity.
-        /// </summary>
-        internal void Dispose() {
-            foreach (Component component in components.Values) {
-                component.Dispose();
-            }
-            components.Clear();
-            ComponentsChanged = null;
-        }
-
-        /// <summary>
         /// Returns the count of the components.
         /// </summary>
-        internal int ComponentCount {
+        public int ComponentCount
+        {
             get {
                 return components.Count;
             }
+        }
+
+        /// <summary>
+        /// Disposes of the Entity.
+        /// </summary>
+        public void Dispose()
+        {
+            components.Clear();
+            ComponentsChanged = null;
         }
     }
 }

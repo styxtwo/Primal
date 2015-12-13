@@ -47,31 +47,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main\API\IDebugInfo.cs" />
-    <Compile Include="Main\API\IFinder.cs" />
-    <Compile Include="Main\DebugInfo.cs" />
-    <Compile Include="Main\API\Component.cs" />
     <Compile Include="Main\API\BaseSystem.cs" />
-    <Compile Include="Main\API\IWorld.cs" />
+    <Compile Include="Main\API\DrawSystem.cs" />
+    <Compile Include="Main\API\IComponent.cs" />
+    <Compile Include="Main\API\IDebugInfo.cs" />
+    <Compile Include="Main\API\IEntity.cs" />
+    <Compile Include="Main\API\IFinder.cs" />
+    <Compile Include="Main\AbstractSystem.cs" />
+    <Compile Include="Main\DebugInfo.cs" />
+    <Compile Include="Main\API\IPrimalWorld.cs" />
     <Compile Include="Main\EntityFinder.cs" />
     <Compile Include="Main\SystemWrapper.cs" />
-    <Compile Include="Main\API\Entity.cs" />
+    <Compile Include="Main\Entity.cs" />
     <Compile Include="Main\Entities.cs" />
     <Compile Include="Main\API\WorldFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main\Systems.cs" />
     <Compile Include="Main\World.cs" />
     <Compile Include="Tests\BaseTests.cs" />
+    <Compile Include="Tests\DebugInfoTests.cs" />
     <Compile Include="Tests\EntityTests.cs" />
     <Compile Include="Tests\FinderTests.cs" />
     <Compile Include="Tests\Mocks\ComponentC.cs" />
     <Compile Include="Tests\Mocks\ComponentB.cs" />
     <Compile Include="Tests\Mocks\ComponentA.cs" />
-    <Compile Include="Tests\Mocks\EmptySystem.cs" />
     <Compile Include="Tests\Mocks\SystemBC.cs" />
     <Compile Include="Tests\Mocks\SystemB.cs" />
     <Compile Include="Tests\Mocks\SystemA.cs" />
-    <Compile Include="Tests\Mocks\SystemU.cs" />
+    <Compile Include="Tests\Mocks\SystemD.cs" />
+    <Compile Include="Tests\Mocks\SystemE.cs" />
     <Compile Include="Tests\Mocks\UpdatableSystem.cs" />
     <Compile Include="Tests\SystemTest.cs" />
     <Compile Include="Tests\WorldEntityTests.cs" />
@@ -85,6 +89,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestFixture]
-    public class EntityTests {
+    class EntityTests {
 
         [Test]
         public void TestComponentAdding() {

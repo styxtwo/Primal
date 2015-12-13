@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestFixture]
-    public class WorldUpdateTests : BaseTests {
+    class WorldUpdateTests : BaseTests {
 
         [Test]
         public void TestMethodsCalled_NoEntity() {
             UpdatableSystem system = new UpdatableSystem();
-            IWorld world = CreateWorld(system);
+            IPrimalWorld world = CreateWorld(system);
 
-            world.UpdateAll(0);
+            world.Update(0);
 
             Assert.AreEqual(0, system.EntityAddedCalled);
             Assert.AreEqual(0, system.EntityRemovedCalled);
@@ -27,12 +27,12 @@ namespace Primal.Tests {
         [Test]
         public void TestMethodsCalled_OneEntity() {
             UpdatableSystem system = new UpdatableSystem();
-            IWorld world = CreateWorld(system);
+            IPrimalWorld world = CreateWorld(system);
 
             world.CreateEntity();
             Assert.AreEqual(1, system.EntityAddedCalled);
 
-            world.UpdateAll(0);
+            world.Update(0);
 
             Assert.AreEqual(1, system.EntityAddedCalled);
             Assert.AreEqual(0, system.EntityRemovedCalled);
@@ -44,14 +44,14 @@ namespace Primal.Tests {
         [Test]
         public void TestMethodsCalled_OneEntityRemoved() {
             UpdatableSystem system = new UpdatableSystem();
-            IWorld world = CreateWorld(system);
-            Entity entity = world.CreateEntity();
+            IPrimalWorld world = CreateWorld(system);
+            IEntity entity = world.CreateEntity();
             world.RemoveEntity(entity);
 
             Assert.AreEqual(1, system.EntityAddedCalled);
             Assert.AreEqual(1, system.EntityRemovedCalled);
 
-            world.UpdateAll(0);
+            world.Update(0);
 
             Assert.AreEqual(1, system.EntityAddedCalled);
             Assert.AreEqual(1, system.EntityRemovedCalled);
@@ -63,11 +63,11 @@ namespace Primal.Tests {
         [Test]
         public void TestMethodsCalled_TwoUpdates() {
             UpdatableSystem system = new UpdatableSystem();
-            IWorld world = CreateWorld(system);
-            Entity entity = world.CreateEntity();
+            IPrimalWorld world = CreateWorld(system);
+            IEntity entity = world.CreateEntity();
 
-            world.UpdateAll(0);
-            world.UpdateAll(0);
+            world.Update(0);
+            world.Update(0);
 
             Assert.AreEqual(1, system.EntityAddedCalled);
             Assert.AreEqual(0, system.EntityRemovedCalled);
@@ -79,11 +79,11 @@ namespace Primal.Tests {
         [Test]
         public void TestMethodsCalled_TwoUpdates_TwoEntities() {
             UpdatableSystem system = new UpdatableSystem();
-            IWorld world = CreateWorld(system);
-            Entity entity = world.CreateEntity();
-            Entity entity2 = world.CreateEntity();
+            IPrimalWorld world = CreateWorld(system);
+            IEntity entity = world.CreateEntity();
+            IEntity entity2 = world.CreateEntity();
 
-            world.UpdateAll(0);
+            world.Update(0);
 
             Assert.AreEqual(2, system.EntityAddedCalled);
             Assert.AreEqual(0, system.EntityRemovedCalled);
@@ -92,7 +92,7 @@ namespace Primal.Tests {
             Assert.AreEqual(2, system.UpdateEntityCalled);
 
             world.RemoveEntity(entity2);
-            world.UpdateAll(0);
+            world.Update(0);
 
             Assert.AreEqual(2, system.EntityAddedCalled);
             Assert.AreEqual(1, system.EntityRemovedCalled);
@@ -105,15 +105,15 @@ namespace Primal.Tests {
         [Test]
         public void TestMethodsCalled_FiveUpdates_TwoEntities() {
             UpdatableSystem system = new UpdatableSystem();
-            IWorld world = CreateWorld(system);
-            Entity entity = world.CreateEntity();
-            Entity entity2 = world.CreateEntity();
+            IPrimalWorld world = CreateWorld(system);
+            IEntity entity = world.CreateEntity();
+            IEntity entity2 = world.CreateEntity();
 
-            world.UpdateAll(0);
-            world.UpdateAll(0);
-            world.UpdateAll(0);
-            world.UpdateAll(0);
-            world.UpdateAll(0);
+            world.Update(0);
+            world.Update(0);
+            world.Update(0);
+            world.Update(0);
+            world.Update(0);
 
             Assert.AreEqual(2, system.EntityAddedCalled);
             Assert.AreEqual(0, system.EntityRemovedCalled);

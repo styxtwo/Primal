@@ -3,16 +3,16 @@ using Primal.Api;
 
 namespace Primal.Tests {
     [TestFixture]
-    public class WorldSystemTests : BaseTests{
+    class WorldSystemTests : BaseTests {
         BaseSystem systemO;
         BaseSystem systemA;
         BaseSystem systemB;
         BaseSystem systemBC;
-        IWorld world;
+        IPrimalWorld world;
         IDebugInfo info;
 
         private void Setup() {
-            systemO = new EmptySystem();
+            systemO = new SystemE();
             systemA = new SystemA();
             systemB = new SystemB();
             systemBC = new SystemBC();
@@ -36,7 +36,7 @@ namespace Primal.Tests {
         public void TestEntityRemoval() {
             Setup();
 
-            Entity entity = world.CreateEntity();
+            IEntity entity = world.CreateEntity();
             AddComponents(entity, new ComponentA());
             world.RemoveEntity(entity);
 
@@ -63,9 +63,9 @@ namespace Primal.Tests {
         [Test]
         public void TestMoreMultipleEntities() {
             Setup();
-            Entity entity = world.CreateEntity();
+            IEntity entity = world.CreateEntity();
             AddComponents(entity, new ComponentA());
-            
+
             AddComponents(world.CreateEntity(), new ComponentA());
             AddComponents(world.CreateEntity(), new ComponentA());
             AddComponents(world.CreateEntity(), new ComponentB());
@@ -90,7 +90,7 @@ namespace Primal.Tests {
             AddComponents(world.CreateEntity(), new ComponentB());
             AddComponents(world.CreateEntity(), new ComponentB(), new ComponentC());
 
-            systemO = new EmptySystem();
+            systemO = new SystemE();
             systemA = new SystemA();
             systemB = new SystemB();
             systemBC = new SystemBC();
@@ -110,41 +110,33 @@ namespace Primal.Tests {
         [Test]
         public void TestSystemUpdate() {
             world = CreateWorld();
-            SystemU u = new SystemU();
-            world.AddSystem(u);
+            SystemE e = new SystemE();
+            world.AddSystem(e);
 
-            world.UpdateAll(1);
-            Assert.AreEqual(true, u.IsUpdated, "Expect U to be updated.");
+            world.Update(1);
+            Assert.IsTrue(e.IsUpdated, "Expect E to be updated.");
         }
 
         [Test]
-        public void TestSystemExcludedUpdate() {
+        public void TestDrawSystemUpdate() {
             world = CreateWorld();
-            SystemU u = new SystemU();
-            world.AddSystem(u);
+            SystemD d = new SystemD();
+            world.AddSystem(d);
 
-            world.UpdateAll(1, typeof(SystemU));
-            Assert.AreEqual(false, u.IsUpdated, "Expect U to be excluded, and thus not updated.");
+            world.Draw(1);
+            Assert.IsTrue(d.IsUpdated, "Expect D to be updated.");
         }
 
         [Test]
-        public void TestSystemUpdateSingle() {
+        public void TestSystemDrawOther() {
             world = CreateWorld();
-            SystemU u = new SystemU();
-            world.AddSystem(u);
+            SystemE e = new SystemE();
+            SystemD d = new SystemD();
+            world.AddSystem(d);
+            world.AddSystem(e);
 
-            world.Update<SystemU>(1);
-            Assert.AreEqual(true, u.IsUpdated, "Expect U to be updated.");
-        }
-
-        [Test]
-        public void TestSystemUpdateSingleOther() {
-            world = CreateWorld();
-            SystemU u = new SystemU();
-            world.AddSystem(u);
-
-            world.Update<SystemA>(1);
-            Assert.AreEqual(false, u.IsUpdated, "Expect U to not be updated, only A is updated.");
+            world.Draw(1);
+            Assert.IsFalse(e.IsUpdated, "Expect E to not be updated, only D is updated.");
         }
     }
 }

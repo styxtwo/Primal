@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestFixture]
-    public class FinderTests : BaseTests {
+    class FinderTests : BaseTests {
 
         IFinder finder;
-        IWorld world;
+        IPrimalWorld world;
 
         private void Setup() {
             world = CreateWorld(new SystemA(), new SystemBC());
             finder = world.EntityFinder;
 
-            Entity entity = world.CreateEntity();
+            IEntity entity = world.CreateEntity();
             entity.Add(new ComponentA());
             entity.Add(new ComponentB());
 

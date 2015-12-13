@@ -1,6 +1,8 @@
 ﻿using Primal.Api;
+using System;
+using System.Collections.Generic;
 
-namespace Primal{
+namespace Primal {
     /// <summary>
     /// Provides an implementation of the IDebugInfo interface.
     /// </summary>
@@ -15,7 +17,19 @@ namespace Primal{
 
         public int TotalSystemCount {
             get {
-                return systems.SystemCount;
+                return DrawSystemCount + BaseSystemCount;
+            }
+        }
+
+        public int BaseSystemCount {
+            get {
+                return systems.BaseSystemCount;
+            }
+        }
+
+        public int DrawSystemCount {
+            get {
+                return systems.DrawSystemCount;
             }
         }
 
@@ -31,11 +45,23 @@ namespace Primal{
             }
         }
 
-        public int ComponentCount(Entity entity) {
+        public IEnumerable<Type> BaseSystems {
+            get {
+                return systems.BaseSystems();
+            }
+        }
+
+        public IEnumerable<Type> DrawSystems {
+            get {
+                return systems.DrawSystems();
+            }
+        }
+
+        public int ComponentCount(IEntity entity) {
             return entity.ComponentCount;
         }
 
-        public int EntityCount(BaseSystem system) {
+        public int EntityCount(AbstractSystem system) {
             return systems.GetEntityCount(system);
         }
     }

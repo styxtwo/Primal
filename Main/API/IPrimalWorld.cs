@@ -6,7 +6,7 @@ namespace Primal.Api {
     /// <summary>
     /// The world in which all entities and systems exist, Create using the WorldFactory.
     /// </summary>
-    public interface IWorld {
+    public interface IPrimalWorld {
 
         /// <summary>
         /// The debug info for this IWorld;
@@ -25,29 +25,33 @@ namespace Primal.Api {
         void AddSystem(BaseSystem system);
 
         /// <summary>
+        /// Adds a system to the world.
+        /// </summary>
+        /// <param name="system">The system to add. </param>
+        void AddSystem(DrawSystem system);
+
+        /// <summary>
         /// Creates an entity in the ECP world.
         /// </summary>
         /// <returns>The created entity</returns>
-        Entity CreateEntity();
+        IEntity CreateEntity();
         
         /// <summary>
         /// Removes an entity from the world.
         /// </summary>
         /// <param name="entity">The entity to remove. </param>
-        void RemoveEntity(Entity entity);
+        void RemoveEntity(IEntity entity);
 
         /// <summary>
-        /// Updates the world, which in turn updates the systems, which work on the entities.
+        /// Updates the systems, which work on the entities.
         /// </summary>
         /// <param name="elapsedMs">The elapsed milliseconds since the last update. </param>
-        /// <param name="excluded">the types of the systems that are not updated.</param>
-        void UpdateAll(double elapsedMs, params Type[] excluded);
+        void Update(double elapsedMs);
 
         /// <summary>
-        /// Updates a specific system.
+        /// Updates the systems working on drawing the entities.
         /// </summary>
         /// <param name="elapsedMs">The elapsed milliseconds since the last update. </param>
-        /// <typeparam name="T">The type to update.</typeparam>
-        void Update<T>(double elapsedMs);
+        void Draw(double elapsedMs);
     }
 }

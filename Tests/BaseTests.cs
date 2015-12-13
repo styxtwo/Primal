@@ -6,16 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Primal.Tests {
-    public abstract class BaseTests {
+    abstract class BaseTests {
 
-        public void AddComponents(Entity entity, params Component[] components) {
-            foreach (Component component in components) {
+        public void AddComponents(IEntity entity, params IComponent[] components) {
+            foreach (IComponent component in components) {
                 entity.Add(component);
             }
         }
 
-        public IWorld CreateWorld(params BaseSystem[] systems) {
-            IWorld world = WorldFactory.Create();
+        public IPrimalWorld CreateWorld(params BaseSystem[] systems) {
+            IPrimalWorld world = WorldFactory.Create();
             foreach (BaseSystem system in systems) {
                 world.AddSystem(system);
             }
