@@ -17,9 +17,7 @@ namespace Primal {
 
         public void Update(double elapsedMs) {
             System.BeforeUpdate(elapsedMs);
-            foreach (Entity entity in entities.ToList()) {
-                System.UpdateEntity(entity, elapsedMs);
-            }
+            System.Update(entities, elapsedMs);
             System.AfterUpdate(elapsedMs);
         }
 

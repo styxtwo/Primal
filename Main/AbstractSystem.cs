@@ -49,6 +49,17 @@ namespace Primal {
         }
 
         /// <summary>
+        /// The update methods for the system can be overridden seperately, to allow for different behaviour.
+        /// </summary>
+        /// <param name="entities">the list of entities</param>
+        /// <param name="elapsedMs">the elapsed time</param>
+        protected internal void Update(IEnumerable<IEntity> entities, double elapsedMs) {
+            foreach (Entity entity in entities) {
+                UpdateEntity(entity, elapsedMs);
+            }
+        }
+
+        /// <summary>
         /// Abstract method that needs to be implemented by the child classes, giving them an 
         /// opportunity to add the key components.
         /// </summary>
