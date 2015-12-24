@@ -13,7 +13,7 @@
         <summary />
         <tags>primal entity component system framework ecs composition game games</tags>
         <dependencies> 
-            <dependency id="NUnit" version="2.6.4" />
+            <dependency id="NUnit" version="3.0.1" />
             <dependency id="Styxtwo-Utilities" version="1.0.0" />
         </dependencies> 
     </metadata>
