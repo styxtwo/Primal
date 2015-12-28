@@ -10,9 +10,10 @@ namespace Primal.Api {
         /// <summary>
         /// Creates the world.
         /// </summary>
+        /// <param name="systems">Optional systems that get added to the world.</param>
         /// <returns>The world that got created. </returns>
-        public static IPrimalWorld Create() {
-            return new World();
+        public static IPrimalWorld Create(params AbstractSystem[] systems) {
+            return new World().AddSystems(systems);
         }
     }
 }

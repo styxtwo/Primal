@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main\API\BaseSystem.cs" />
+    <Compile Include="Main\API\UpdateSystem.cs" />
     <Compile Include="Main\API\DrawSystem.cs" />
     <Compile Include="Main\API\IComponent.cs" />
     <Compile Include="Main\API\IDebugInfo.cs" />
@@ -64,10 +64,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main\Systems.cs" />
     <Compile Include="Main\World.cs" />
-    <Compile Include="Tests\BaseTests.cs" />
     <Compile Include="Tests\DebugInfoTests.cs" />
     <Compile Include="Tests\EntityTests.cs" />
     <Compile Include="Tests\FinderTests.cs" />
+    <Compile Include="Tests\Mocks\ComponentD.cs" />
     <Compile Include="Tests\Mocks\ComponentC.cs" />
     <Compile Include="Tests\Mocks\ComponentB.cs" />
     <Compile Include="Tests\Mocks\ComponentA.cs" />

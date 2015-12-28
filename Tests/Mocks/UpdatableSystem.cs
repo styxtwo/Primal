@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Primal.Tests {
-    class UpdatableSystem : BaseSystem {
+    class UpdatableSystem : UpdateSystem {
         public int UpdateEntityCalled { get; private set; }
         public int BeforeUpdateCalled { get; private set; }
         public int AfterUpdateCalled { get; private set; }

@@ -21,14 +21,14 @@ namespace Primal.Api {
         /// <summary>
         /// Adds a system to the world.
         /// </summary>
-        /// <param name="system">The system to add. </param>
-        void AddSystem(BaseSystem system);
+        /// <param name="system">The system(s) to add. </param>
+        IPrimalWorld AddSystem(AbstractSystem systems);
 
         /// <summary>
-        /// Adds a system to the world.
+        /// Adds several systems to the world.
         /// </summary>
-        /// <param name="system">The system to add. </param>
-        void AddSystem(DrawSystem system);
+        /// <param name="system">The systems to add. </param>
+        IPrimalWorld AddSystems(params AbstractSystem[] systems);
 
         /// <summary>
         /// Creates an entity in the ECP world.

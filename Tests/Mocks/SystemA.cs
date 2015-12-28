@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Primal.Tests {
-    class SystemA : BaseSystem {
+    class SystemA : UpdateSystem {
         protected internal override void AddKeyComponents() {
             AddKeyComponent<ComponentA>();
         }

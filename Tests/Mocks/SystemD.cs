@@ -12,14 +12,15 @@ namespace Primal.Tests {
     class SystemD : DrawSystem {
         public Boolean IsUpdated { get; set; }
 
+        protected internal override void AddKeyComponents() {
+            AddKeyComponent<ComponentD>();
+        }
+
         protected internal override void BeforeUpdate(double elapsedMs) {
             IsUpdated = true;
         }
 
         protected internal override void UpdateEntity(IEntity entity, double elapsedMs) {
-        }
-
-        protected internal override void AddKeyComponents() {
         }
     }
 }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestFixture]
-    class WorldUpdateTests : BaseTests {
+    class WorldUpdateTests {
 
         [Test]
         public void TestMethodsCalled_NoEntity() {
             UpdatableSystem system = new UpdatableSystem();
-            IPrimalWorld world = CreateWorld(system);
+            IPrimalWorld world = WorldFactory.Create(system);
 
             world.Update(0);
 
@@ -27,7 +27,7 @@ namespace Primal.Tests {
         [Test]
         public void TestMethodsCalled_OneEntity() {
             UpdatableSystem system = new UpdatableSystem();
-            IPrimalWorld world = CreateWorld(system);
+            IPrimalWorld world = WorldFactory.Create(system);
 
             world.CreateEntity();
             Assert.AreEqual(1, system.EntityAddedCalled);
@@ -44,7 +44,7 @@ namespace Primal.Tests {
         [Test]
         public void TestMethodsCalled_OneEntityRemoved() {
             UpdatableSystem system = new UpdatableSystem();
-            IPrimalWorld world = CreateWorld(system);
+            IPrimalWorld world = WorldFactory.Create(system);
             IEntity entity = world.CreateEntity();
             world.RemoveEntity(entity);
 
@@ -63,7 +63,7 @@ namespace Primal.Tests {
         [Test]
         public void TestMethodsCalled_TwoUpdates() {
             UpdatableSystem system = new UpdatableSystem();
-            IPrimalWorld world = CreateWorld(system);
+            IPrimalWorld world = WorldFactory.Create(system);
             IEntity entity = world.CreateEntity();
 
             world.Update(0);
@@ -79,7 +79,7 @@ namespace Primal.Tests {
         [Test]
         public void TestMethodsCalled_TwoUpdates_TwoEntities() {
             UpdatableSystem system = new UpdatableSystem();
-            IPrimalWorld world = CreateWorld(system);
+            IPrimalWorld world = WorldFactory.Create(system);
             IEntity entity = world.CreateEntity();
             IEntity entity2 = world.CreateEntity();
 
@@ -105,7 +105,7 @@ namespace Primal.Tests {
         [Test]
         public void TestMethodsCalled_FiveUpdates_TwoEntities() {
             UpdatableSystem system = new UpdatableSystem();
-            IPrimalWorld world = CreateWorld(system);
+            IPrimalWorld world = WorldFactory.Create(system);
             IEntity entity = world.CreateEntity();
             IEntity entity2 = world.CreateEntity();
 

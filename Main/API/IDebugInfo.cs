@@ -37,13 +37,13 @@ namespace Primal.Api {
         /// Returns a list of the types of the base (non draw) systems, in the order they are executed.
         /// </summary>
         /// <returns>The types of the systems</returns>
-        IEnumerable<Type> BaseSystems { get; }
+        IEnumerable<Type> UpdateSystemTypes { get; }
 
         /// <summary>
         /// Returns a list of the types of the draw systems, in the order they are executed.
         /// </summary>
         /// <returns>The types of the systems</returns>
-        IEnumerable<Type> DrawSystems { get; }
+        IEnumerable<Type> DrawSystemTypes { get; }
 
         /// <summary>
         /// The amount of components in a specific entity.
@@ -58,5 +58,15 @@ namespace Primal.Api {
         /// <param name="system">The system to check.</param>
         /// <returns>The amount of entities.</returns>
         int EntityCount(AbstractSystem system);
+
+        /// <summary>
+        /// Prints the list of update systems.
+        /// </summary>
+        void printUpdateSystemTypes();
+
+        /// <summary>
+        /// Prints the list of draw systems.
+        /// </summary>
+        void printDrawSystemTypes();
     }
 }

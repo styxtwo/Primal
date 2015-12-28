@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestFixture]
-    class DebugInfoTests : BaseTests {
+    class DebugInfoTests {
+
         /// <summary>
         /// The info class under test.
         /// </summary>
@@ -16,12 +17,12 @@ namespace Primal.Tests {
 
         IPrimalWorld world;
         IEntity entity;
-        BaseSystem systemA;
+        UpdateSystem systemA;
 
         private void Setup() {
             //Systems
             systemA = new SystemA();
-            world = CreateWorld(systemA, new SystemB(), new SystemBC(), new SystemE());
+            world = WorldFactory.Create(systemA, new SystemB(), new SystemBC(), new SystemE());
             world.AddSystem(new SystemD());
 
             //Entities
@@ -85,7 +86,7 @@ namespace Primal.Tests {
             expected.Add(typeof(SystemB));
             expected.Add(typeof(SystemBC));
             expected.Add(typeof(SystemE));
-            Assert.IsTrue(info.BaseSystems.SequenceEqual(expected), "Expect the order of the systems to be the same.");
+            Assert.IsTrue(info.UpdateSystemTypes.SequenceEqual(expected), "Expect the order of the systems to be the same.");
         }
 
         [Test]
@@ -93,7 +94,7 @@ namespace Primal.Tests {
             Setup();
             IList<Type> expected = new List<Type>();
             expected.Add(typeof(SystemD));
-            Assert.IsTrue(info.DrawSystems.SequenceEqual(expected), "Expect the order of the systems to be the same.");
+            Assert.IsTrue(info.DrawSystemTypes.SequenceEqual(expected), "Expect the order of the systems to be the same.");
         }
     }
 

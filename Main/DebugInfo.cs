@@ -45,13 +45,13 @@ namespace Primal {
             }
         }
 
-        public IEnumerable<Type> BaseSystems {
+        public IEnumerable<Type> UpdateSystemTypes {
             get {
                 return systems.BaseSystems();
             }
         }
 
-        public IEnumerable<Type> DrawSystems {
+        public IEnumerable<Type> DrawSystemTypes {
             get {
                 return systems.DrawSystems();
             }
@@ -63,6 +63,18 @@ namespace Primal {
 
         public int EntityCount(AbstractSystem system) {
             return systems.GetEntityCount(system);
+        }
+
+        public void printUpdateSystemTypes() {
+            foreach (Type type in UpdateSystemTypes) {
+                System.Diagnostics.Debug.WriteLine("System type: " + type);
+            }
+        }
+
+        public void printDrawSystemTypes() {
+            foreach (Type type in DrawSystemTypes) {
+                System.Diagnostics.Debug.WriteLine("System type: " + type);
+            }
         }
     }
 }

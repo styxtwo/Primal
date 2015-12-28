@@ -1,4 +1,5 @@
 ﻿using Primal.Api;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -54,6 +55,10 @@ namespace Primal {
                     AddEntity(entity);
                 }
             }
+        }
+
+        public Boolean IsDraw() {
+            return System.IsDraw();
         }
 
         public int EntityCount {

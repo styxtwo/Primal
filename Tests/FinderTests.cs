@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestFixture]
-    class FinderTests : BaseTests {
+    class FinderTests {
 
         IFinder finder;
         IPrimalWorld world;
 
         private void Setup() {
-            world = CreateWorld(new SystemA(), new SystemBC());
+            world = WorldFactory.Create(new SystemA(), new SystemBC());
             finder = world.EntityFinder;
 
             IEntity entity = world.CreateEntity();

@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace Primal.Tests {
     [TestFixture]
-    class WorldEntityTests : BaseTests {
-        BaseSystem systemA;
-        BaseSystem systemBC;
+    class WorldEntityTests {
+
+        UpdateSystem systemA;
+        UpdateSystem systemBC;
         IPrimalWorld world;
         IDebugInfo info;
 
         private void Setup() {
             systemA = new SystemA();
             systemBC = new SystemBC();
-            world = CreateWorld(systemA, systemBC);
+            world = WorldFactory.Create(systemA, systemBC);
             info = world.DebugInfo;
         }
 
@@ -72,8 +73,7 @@ namespace Primal.Tests {
         public void TestEntityDisposedOnRemoval() {
             Setup();
 
-            IEntity entity = world.CreateEntity();
-            AddComponents(entity, new ComponentA());
+            IEntity entity = world.CreateEntity().Add(new ComponentA());
             world.RemoveEntity(entity);
 
             Assert.AreEqual(0, entity.ComponentCount);

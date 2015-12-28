@@ -9,32 +9,22 @@ namespace Primal {
     /// Provides a collection for the systems.
     /// </summary>
     class Systems {
-        private IDictionary<Type, SystemWrapper> updateSystems;
-        private IDictionary<Type, SystemWrapper> drawSystems;
+        private IDictionary<Type, SystemWrapper> wrappers;
 
         public Systems(Entities entities) {
-            updateSystems = new Dictionary<Type, SystemWrapper>();
-            drawSystems = new Dictionary<Type, SystemWrapper>();
+            wrappers = new Dictionary<Type, SystemWrapper>();
             entities.EntityAdded += EntityAdded;
             entities.EntityRemoved += EntityRemoved;
             entities.EntityChanged += EntityChanged;
         }
 
         //-- Addition methods --//
-        public bool Add(BaseSystem system, IEnumerable<IEntity> existingEntities) {
-            return Add(system, existingEntities, updateSystems);
-        }
-
-        public bool Add(DrawSystem system, IEnumerable<IEntity> existingEntities) {
-            return Add(system, existingEntities, drawSystems);
-        }
-
-        public bool Add(AbstractSystem system, IEnumerable<IEntity> existingEntities, IDictionary<Type, SystemWrapper> container) {
-            if (container.ContainsKey(system.GetType())) {
+        public bool Add(AbstractSystem system, IEnumerable<IEntity> existingEntities) {
+            if (wrappers.ContainsKey(system.GetType())) {
                 return false;
             }
             SystemWrapper wrapper = new SystemWrapper(system);
-            container.Add(system.GetType(), wrapper);
+            wrappers.Add(system.GetType(), wrapper);
 
             foreach (Entity enitity in existingEntities) {
                 wrapper.AddEntity(enitity);
@@ -44,11 +34,11 @@ namespace Primal {
 
         //-- Update methods --//
         internal void Update(double elapsedMs) {
-            Update(elapsedMs, updateSystems.Values);
+            Update(elapsedMs, wrappers.Values.Where(system => !system.IsDraw()));
         }
 
-        internal void Draw(double elapsedMs, params Type[] excluded) {
-            Update(elapsedMs, drawSystems.Values);
+        internal void Draw(double elapsedMs) {
+            Update(elapsedMs, wrappers.Values.Where(system => system.IsDraw()));
         }
         
         private void Update(double elapsedMs, IEnumerable<SystemWrapper> systems) {
@@ -59,19 +49,19 @@ namespace Primal {
 
         //-- Entity Added/Removed Methods --//
         private void EntityAdded(Entity entity) {
-            foreach (SystemWrapper system in updateSystems.Values) {
+            foreach (SystemWrapper system in wrappers.Values) {
                 system.AddEntity(entity);
             }
         }
 
         private void EntityRemoved(Entity entity) {
-            foreach (SystemWrapper system in updateSystems.Values) {
+            foreach (SystemWrapper system in wrappers.Values) {
                 system.RemoveEntity(entity);
             }
         }
 
         private void EntityChanged(Entity entity) {
-            foreach (SystemWrapper system in updateSystems.Values) {
+            foreach (SystemWrapper system in wrappers.Values) {
                 system.UpdateEntityValidity(entity);
             }
         }
@@ -79,7 +69,7 @@ namespace Primal {
         //-- Debug data Methods --// 
         public int GetEntityCount(AbstractSystem system) {
             SystemWrapper wrapper;
-            updateSystems.TryGetValue(system.GetType(), out wrapper);
+            wrappers.TryGetValue(system.GetType(), out wrapper);
             if (wrapper == null) {
                 throw (new ArgumentException("System not found."));
             }
@@ -88,22 +78,22 @@ namespace Primal {
 
         public int BaseSystemCount {
             get {
-                return updateSystems.Count;
+                return wrappers.Values.Where(system => !system.IsDraw()).Count();
             }
         }
 
         public int DrawSystemCount {
             get {
-                return drawSystems.Count;
+                return wrappers.Values.Where(system => system.IsDraw()).Count();
             }
         }
 
         public IEnumerable<Type> BaseSystems() {
-            return updateSystems.Keys;
+            return wrappers.Where(pair => !pair.Value.IsDraw()).Select(pair => pair.Key);
         }
 
         public IEnumerable<Type> DrawSystems() {
-            return drawSystems.Keys;
+            return wrappers.Where(pair => pair.Value.IsDraw()).Select(pair => pair.Key);
         }
     }
 }

@@ -3,11 +3,13 @@ using Primal.Api;
 
 namespace Primal.Tests {
     [TestFixture]
-    class WorldSystemTests : BaseTests {
-        BaseSystem systemO;
-        BaseSystem systemA;
-        BaseSystem systemB;
-        BaseSystem systemBC;
+    class WorldSystemTests {
+
+        UpdateSystem systemO;
+        UpdateSystem systemA;
+        UpdateSystem systemB;
+        UpdateSystem systemBC;
+        DrawSystem systemD;
         IPrimalWorld world;
         IDebugInfo info;
 
@@ -16,62 +18,64 @@ namespace Primal.Tests {
             systemA = new SystemA();
             systemB = new SystemB();
             systemBC = new SystemBC();
-            world = CreateWorld(systemO, systemA, systemB, systemBC);
+            systemD = new SystemD();
+            world = WorldFactory.Create(systemO, systemA, systemB, systemBC, systemD);
             info = world.DebugInfo;
         }
 
         [Test]
         public void TestEntityAddition() {
             Setup();
-
-            AddComponents(world.CreateEntity(), new ComponentA());
+            world.CreateEntity().Add(new ComponentA());
 
             Assert.AreEqual(1, info.EntityCount(systemO));
             Assert.AreEqual(1, info.EntityCount(systemA));
             Assert.AreEqual(0, info.EntityCount(systemB));
             Assert.AreEqual(0, info.EntityCount(systemBC));
+            Assert.AreEqual(0, info.EntityCount(systemD));
         }
 
         [Test]
         public void TestEntityRemoval() {
             Setup();
 
-            IEntity entity = world.CreateEntity();
-            AddComponents(entity, new ComponentA());
+            IEntity entity = world.CreateEntity().Add(new ComponentA());
             world.RemoveEntity(entity);
 
             Assert.AreEqual(0, info.EntityCount(systemO));
             Assert.AreEqual(0, info.EntityCount(systemA));
             Assert.AreEqual(0, info.EntityCount(systemB));
             Assert.AreEqual(0, info.EntityCount(systemBC));
+            Assert.AreEqual(0, info.EntityCount(systemD));
         }
 
         [Test]
         public void TestMultipleEntities() {
             Setup();
 
-            AddComponents(world.CreateEntity(), new ComponentA());
-            AddComponents(world.CreateEntity(), new ComponentA(), new ComponentB());
-            AddComponents(world.CreateEntity(), new ComponentB(), new ComponentC());
+            world.CreateEntity().Add(new ComponentA());
+            world.CreateEntity().Add(new ComponentA(), new ComponentB());
+            world.CreateEntity().Add(new ComponentB(), new ComponentC());
+            world.CreateEntity().Add(new ComponentD());
 
-            Assert.AreEqual(3, info.EntityCount(systemO));
+            Assert.AreEqual(4, info.EntityCount(systemO));
             Assert.AreEqual(2, info.EntityCount(systemA));
             Assert.AreEqual(2, info.EntityCount(systemB));
             Assert.AreEqual(1, info.EntityCount(systemBC));
+            Assert.AreEqual(1, info.EntityCount(systemD));
         }
 
         [Test]
         public void TestMoreMultipleEntities() {
             Setup();
-            IEntity entity = world.CreateEntity();
-            AddComponents(entity, new ComponentA());
+            IEntity entity = world.CreateEntity().Add(new ComponentA());
 
-            AddComponents(world.CreateEntity(), new ComponentA());
-            AddComponents(world.CreateEntity(), new ComponentA());
-            AddComponents(world.CreateEntity(), new ComponentB());
-            AddComponents(world.CreateEntity(), new ComponentC());
-            AddComponents(world.CreateEntity(), new ComponentB(), new ComponentC());
-            AddComponents(world.CreateEntity(), new ComponentC(), new ComponentB());
+            world.CreateEntity().Add(new ComponentA());
+            world.CreateEntity().Add(new ComponentA());
+            world.CreateEntity().Add(new ComponentB());
+            world.CreateEntity().Add(new ComponentC(), new ComponentD());
+            world.CreateEntity().Add(new ComponentB(), new ComponentC());
+            world.CreateEntity().Add(new ComponentC(), new ComponentB(), new ComponentD());
 
             world.RemoveEntity(entity);
 
@@ -79,37 +83,41 @@ namespace Primal.Tests {
             Assert.AreEqual(2, info.EntityCount(systemA));
             Assert.AreEqual(3, info.EntityCount(systemB));
             Assert.AreEqual(2, info.EntityCount(systemBC));
+            Assert.AreEqual(2, info.EntityCount(systemD));
         }
 
         [Test]
         public void TestSystemAddedAfterEntity() {
-            world = CreateWorld();
+            world = WorldFactory.Create();
             info = world.DebugInfo;
 
-            AddComponents(world.CreateEntity(), new ComponentA());
-            AddComponents(world.CreateEntity(), new ComponentB());
-            AddComponents(world.CreateEntity(), new ComponentB(), new ComponentC());
+            world.CreateEntity().Add(new ComponentA());
+            world.CreateEntity().Add(new ComponentB(), new ComponentD());
+            world.CreateEntity().Add(new ComponentB(), new ComponentC());
 
             systemO = new SystemE();
             systemA = new SystemA();
             systemB = new SystemB();
             systemBC = new SystemBC();
+            systemD = new SystemD();
             world.AddSystem(systemO);
             world.AddSystem(systemA);
             world.AddSystem(systemB);
             world.AddSystem(systemBC);
+            world.AddSystem(systemD);
 
-            AddComponents(world.CreateEntity(), new ComponentA());
+            world.CreateEntity().Add(new ComponentA());
 
             Assert.AreEqual(4, info.EntityCount(systemO));
             Assert.AreEqual(2, info.EntityCount(systemA));
             Assert.AreEqual(2, info.EntityCount(systemB));
             Assert.AreEqual(1, info.EntityCount(systemBC));
+            Assert.AreEqual(1, info.EntityCount(systemD));
         }
 
         [Test]
         public void TestSystemUpdate() {
-            world = CreateWorld();
+            world = WorldFactory.Create();
             SystemE e = new SystemE();
             world.AddSystem(e);
 
@@ -119,7 +127,7 @@ namespace Primal.Tests {
 
         [Test]
         public void TestDrawSystemUpdate() {
-            world = CreateWorld();
+            world = WorldFactory.Create();
             SystemD d = new SystemD();
             world.AddSystem(d);
 
@@ -129,7 +137,7 @@ namespace Primal.Tests {
 
         [Test]
         public void TestSystemDrawOther() {
-            world = CreateWorld();
+            world = WorldFactory.Create();
             SystemE e = new SystemE();
             SystemD d = new SystemD();
             world.AddSystem(d);

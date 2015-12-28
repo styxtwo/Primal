@@ -53,11 +53,16 @@ namespace Primal {
         /// </summary>
         /// <param name="entities">the list of entities</param>
         /// <param name="elapsedMs">the elapsed time</param>
-        protected internal void Update(IEnumerable<IEntity> entities, double elapsedMs) {
+        protected internal virtual void Update(IEnumerable<IEntity> entities, double elapsedMs) {
             foreach (Entity entity in entities) {
                 UpdateEntity(entity, elapsedMs);
             }
         }
+
+        /// <summary>
+        /// Determines whether a system is a draw system or not.
+        /// </summary>
+        protected internal abstract Boolean IsDraw();
 
         /// <summary>
         /// Abstract method that needs to be implemented by the child classes, giving them an 
@@ -71,7 +76,7 @@ namespace Primal {
         /// <param name="entity">The entity to update.</param>
         /// <param name="elapsedMs">he elapsed time since the last update.</param>
         protected internal abstract void UpdateEntity(IEntity entity, double elapsedMs);
-
+        
         /// <summary>
         /// Before a specific update.
         /// </summary>

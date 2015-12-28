@@ -9,5 +9,8 @@ namespace Primal.Api {
     /// Seperated from the base systems to allow both the update and draw systems to be updated seperately.
     /// </summary>
     public abstract class DrawSystem : AbstractSystem {
+        protected internal override Boolean IsDraw() {
+            return true;
+        }
     }
 }

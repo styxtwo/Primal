@@ -9,7 +9,7 @@ namespace Primal.Tests {
     /// <summary>
     /// Provides a system for which no key components are nessesary
     /// </summary>
-    class SystemE : BaseSystem {
+    class SystemE : UpdateSystem {
         public Boolean IsUpdated { get; set; }
 
         protected internal override void BeforeUpdate(double elapsedMs) {

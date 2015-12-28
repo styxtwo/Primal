@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Primal {
+
     /// <summary>
     /// Implementation of the IWorld interface.
     /// </summary>
@@ -19,14 +20,17 @@ namespace Primal {
             DebugInfo = new DebugInfo(entities, systems);
         }
 
-        public void AddSystem(BaseSystem system) {
-            system.Finder = this.EntityFinder;
-            systems.Add(system, entities.EntityFinder.Find(system.KeyComponents));
+        public IPrimalWorld AddSystems(AbstractSystem[] inputSystems) {
+            foreach (AbstractSystem system in inputSystems) {
+                AddSystem(system);
+            }
+            return this;
         }
 
-        public void AddSystem(DrawSystem system) {
+        public IPrimalWorld AddSystem(AbstractSystem system) {
             system.Finder = this.EntityFinder;
             systems.Add(system, entities.EntityFinder.Find(system.KeyComponents));
+            return this;
         }
 
         public IEntity CreateEntity() {
