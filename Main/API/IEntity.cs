@@ -14,16 +14,16 @@ namespace Primal.Api
         /// <summary>
         /// Adds a component to the entity. Only one of each type may be added.
         /// </summary>
-        /// <param name="component">The component to add. </param>
-        /// <returns>Whether the component was added successfully. </returns>
-        bool Add(IComponent component);
+        /// <param name="components">The component(s) to add. </param>
+        /// <returns>The entity itself, to allow for chaining. </returns>
+        IEntity Add(params IComponent[] components);
 
         /// <summary>
         /// Removes a component from the entity.
         /// </summary>
         /// <typeparam name="T">The type of the component to add. </typeparam>
-        /// <returns>Whether the component was removed successfully. </returns>
-        bool Remove<T>();
+        /// <returns>The entity itself, to allow for chaining. </returns>
+        IEntity Remove<T>();
 
         /// <summary>
         /// Returns the component of a specific type. Null if no component is available.

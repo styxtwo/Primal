@@ -50,6 +50,24 @@ namespace Primal.Tests {
         }
 
         [Test]
+        public void TestParamsAddition() {
+            Entity entity = new Entity();
+            entity.Add(new ComponentA(), new ComponentB());
+            Assert.AreEqual(2, entity.ComponentCount);
+            Assert.IsTrue(entity.Contains<ComponentA>());
+            Assert.IsTrue(entity.Contains<ComponentB>());
+        }
+
+        [Test]
+        public void TestMethodChainedAddition() {
+            Entity entity = new Entity();
+            entity.Add(new ComponentA()).Add(new ComponentB());
+            Assert.AreEqual(2, entity.ComponentCount);
+            Assert.IsTrue(entity.Contains<ComponentA>());
+            Assert.IsTrue(entity.Contains<ComponentB>());
+        }
+
+        [Test]
         public void TestContains() {
             Entity entity = new Entity();
             entity.Add(new ComponentA());
