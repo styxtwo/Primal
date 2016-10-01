@@ -1,82 +1,82 @@
 ﻿using NUnit.Framework;
 using Primal.Api;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Primal.Tests {
-    [TestFixture]
-    class WorldEntityTests {
+namespace Primal.Tests
+{
+	[TestFixture]
+	class WorldEntityTests
+	{
 
-        UpdateSystem systemA;
-        UpdateSystem systemBC;
-        IPrimalWorld world;
-        IDebugInfo info;
+		UpdateSystem systemA;
+		UpdateSystem systemBC;
+		IPrimalWorld world;
+		IDebugInfo info;
 
-        private void Setup() {
-            systemA = new SystemA();
-            systemBC = new SystemBC();
-            world = WorldFactory.Create(systemA, systemBC);
-            info = world.DebugInfo;
-        }
+		private void Setup()
+		{
+			systemA = new SystemA();
+			systemBC = new SystemBC();
+			world = WorldFactory.Create(systemA, systemBC);
+			info = world.DebugInfo;
+		}
 
-        [Test]
-        public void TestComponentAddition() {
-            Setup();
+		[Test]
+		public void TestComponentAddition()
+		{
+			Setup();
 
-            IEntity entity = world.CreateEntity();
+			IEntity entity = world.CreateEntity();
 
-            //no components.
-            Assert.AreEqual(0, info.EntityCount(systemA));
-            Assert.AreEqual(0, info.EntityCount(systemBC));
+			//no components.
+			Assert.AreEqual(0, info.EntityCount(systemA));
+			Assert.AreEqual(0, info.EntityCount(systemBC));
 
-            entity.Add(new ComponentA());
+			entity.Add(new ComponentA());
 
-            //A
-            Assert.AreEqual(1, info.EntityCount(systemA));
-            Assert.AreEqual(0, info.EntityCount(systemBC));
+			//A
+			Assert.AreEqual(1, info.EntityCount(systemA));
+			Assert.AreEqual(0, info.EntityCount(systemBC));
 
-            entity.Add(new ComponentB());
+			entity.Add(new ComponentB());
 
-            //A + B
-            Assert.AreEqual(1, info.EntityCount(systemA));
-            Assert.AreEqual(0, info.EntityCount(systemBC));
+			//A + B
+			Assert.AreEqual(1, info.EntityCount(systemA));
+			Assert.AreEqual(0, info.EntityCount(systemBC));
 
-            entity.Add(new ComponentC());
+			entity.Add(new ComponentC());
 
-            //A + B + C
-            Assert.AreEqual(1, info.EntityCount(systemA));
-            Assert.AreEqual(1, info.EntityCount(systemBC));
+			//A + B + C
+			Assert.AreEqual(1, info.EntityCount(systemA));
+			Assert.AreEqual(1, info.EntityCount(systemBC));
 
-            entity.Remove<ComponentA>();
+			entity.Remove<ComponentA>();
 
-            //B + C
-            Assert.AreEqual(0, info.EntityCount(systemA));
-            Assert.AreEqual(1, info.EntityCount(systemBC));
+			//B + C
+			Assert.AreEqual(0, info.EntityCount(systemA));
+			Assert.AreEqual(1, info.EntityCount(systemBC));
 
-            entity.Remove<ComponentC>();
+			entity.Remove<ComponentC>();
 
-            //B
-            Assert.AreEqual(0, info.EntityCount(systemA));
-            Assert.AreEqual(0, info.EntityCount(systemBC));
+			//B
+			Assert.AreEqual(0, info.EntityCount(systemA));
+			Assert.AreEqual(0, info.EntityCount(systemBC));
 
-            entity.Add(new ComponentC());
+			entity.Add(new ComponentC());
 
-            //B + C
-            Assert.AreEqual(0, info.EntityCount(systemA));
-            Assert.AreEqual(1, info.EntityCount(systemBC));
-        }
+			//B + C
+			Assert.AreEqual(0, info.EntityCount(systemA));
+			Assert.AreEqual(1, info.EntityCount(systemBC));
+		}
 
-        [Test]
-        public void TestEntityDisposedOnRemoval() {
-            Setup();
+		[Test]
+		public void TestEntityDisposedOnRemoval()
+		{
+			Setup();
 
-            IEntity entity = world.CreateEntity().Add(new ComponentA());
-            world.RemoveEntity(entity);
+			IEntity entity = world.CreateEntity().Add(new ComponentA());
+			world.RemoveEntity(entity);
 
-            Assert.AreEqual(0, entity.ComponentCount);
-        }
-    }
+			Assert.AreEqual(0, entity.ComponentCount);
+		}
+	}
 }
