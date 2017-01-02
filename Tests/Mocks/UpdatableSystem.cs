@@ -14,10 +14,6 @@ namespace Primal.Tests
 
 		public int EntityRemovedCalled { get; private set; }
 
-		protected internal override void AddKeyComponents()
-		{
-		}
-
 		protected internal override void UpdateEntity(IEntity entity, double elapsedMs)
 		{
 			UpdateEntityCalled++;

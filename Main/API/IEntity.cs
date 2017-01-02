@@ -1,4 +1,7 @@
-﻿namespace Primal.Api
+﻿using System.Collections.Generic;
+using System;
+
+namespace Primal.Api
 {
 	/// <summary>
 	/// Provides the interface of an entity for the systems to work on. 
@@ -32,6 +35,13 @@
 		/// <typeparam name="T">The specific type of the component to check. </typeparam>
 		/// <returns>Whether the component is present. </returns>
 		bool Contains<T>();
+
+		/// <summary>
+		/// Checks if the entity contains all components with a specific type.
+		/// </summary>
+		/// <returns><c>true</c>, if all components was containsed, <c>false</c> otherwise.</returns>
+		/// <param name="types">The types to check. </param>
+		bool ContainsAll(IEnumerable<Type> types);
 
 		/// <summary>
 		/// Returns the count of the components.

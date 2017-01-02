@@ -4,9 +4,9 @@ namespace Primal.Tests
 {
 	class SystemB : UpdateSystem
 	{
-		protected internal override void AddKeyComponents()
+		public SystemB()
 		{
-			AddKeyComponent<ComponentB>();
+			RegisterComponent<ComponentB>();
 		}
 
 		protected internal override void UpdateEntity(IEntity entity, double elapsedMs)

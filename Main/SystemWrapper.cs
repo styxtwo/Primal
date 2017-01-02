@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Primal.Api;
 
 namespace Primal
 {
@@ -12,12 +13,12 @@ namespace Primal
 	{
 		public AbstractSystem System { get; private set; }
 
-		private IList<Entity> entities;
+		private IList<IEntity> entities;
 
 		public SystemWrapper(AbstractSystem system)
 		{
 			System = system;
-			entities = new List<Entity>();
+			entities = new List<IEntity>();
 		}
 
 		public void Update(double elapsedMs)
@@ -27,9 +28,9 @@ namespace Primal
 			System.AfterUpdate(elapsedMs);
 		}
 
-		public void AddEntity(Entity entity)
+		public void AddEntity(IEntity entity)
 		{
-			if (!entity.ContainsAll(System.KeyComponents)) {
+			if (!entity.ContainsAll(System.RegisteredComponents)) {
 				//entity does not have the right components
 				return;
 			}
@@ -41,7 +42,7 @@ namespace Primal
 			System.EntityAdded(entity);
 		}
 
-		public void RemoveEntity(Entity entity)
+		public void RemoveEntity(IEntity entity)
 		{
 			if (!entities.Contains(entity)) {
 				//system does not contain the entity.
@@ -51,14 +52,14 @@ namespace Primal
 			System.EntityRemoved(entity);
 		}
 
-		public void UpdateEntityValidity(Entity entity)
+		public void UpdateEntityValidity(IEntity entity)
 		{
 			if (entities.Contains(entity)) {
-				if (!entity.ContainsAll(System.KeyComponents)) {
+				if (!entity.ContainsAll(System.RegisteredComponents)) {
 					RemoveEntity(entity);
 				}
 			} else {
-				if (entity.ContainsAll(System.KeyComponents)) {
+				if (entity.ContainsAll(System.RegisteredComponents)) {
 					AddEntity(entity);
 				}
 			}

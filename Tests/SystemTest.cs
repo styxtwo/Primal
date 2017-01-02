@@ -10,33 +10,33 @@ namespace Primal.Tests
 		public void TestEmptyKeyComponents()
 		{
 			AbstractSystem system = new SystemE();
-			Assert.AreEqual(0, system.KeyComponents.Count);
+			Assert.AreEqual(0, system.RegisteredComponents.Count);
 		}
 
 		[Test]
 		public void TestAdditionKeyComponents()
 		{
 			AbstractSystem system = new SystemE();
-			system.AddKeyComponent<ComponentA>();
-			Assert.AreEqual(1, system.KeyComponents.Count);
+			system.RegisterComponent<ComponentA>();
+			Assert.AreEqual(1, system.RegisteredComponents.Count);
 		}
 
 		[Test]
 		public void TestDoubleAdditionKeyComponents()
 		{
 			AbstractSystem system = new SystemE();
-			system.AddKeyComponent<ComponentA>();
-			system.AddKeyComponent<ComponentA>();
-			Assert.AreEqual(1, system.KeyComponents.Count);
+			system.RegisterComponent<ComponentA>();
+			system.RegisterComponent<ComponentA>();
+			Assert.AreEqual(1, system.RegisteredComponents.Count);
 		}
 
 		[Test]
 		public void TestDifferentDoubleAdditionKeyComponents()
 		{
 			AbstractSystem system = new SystemE();
-			system.AddKeyComponent<ComponentA>();
-			system.AddKeyComponent<ComponentB>();
-			Assert.AreEqual(2, system.KeyComponents.Count);
+			system.RegisterComponent<ComponentA>();
+			system.RegisterComponent<ComponentB>();
+			Assert.AreEqual(2, system.RegisteredComponents.Count);
 		}
 	}
 }

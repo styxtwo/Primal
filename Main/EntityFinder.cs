@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Primal.Main
+namespace Primal
 {
 	/// <summary>
 	/// Implementation of the IFinder interface.

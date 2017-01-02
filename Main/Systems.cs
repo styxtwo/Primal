@@ -8,19 +8,21 @@ namespace Primal
 	/// <summary>
 	/// Provides a collection for the systems.
 	/// </summary>
-	class Systems
+	class Systems : IEventHandler
 	{
 		private IDictionary<Type, SystemWrapper> wrappers;
+		EntityFinder entityFinder;
 
-		public Systems(Entities entities)
+		public Systems(EntityFinder finder, IEventBus eventBus)
 		{
+			entityFinder = finder;
 			wrappers = new Dictionary<Type, SystemWrapper>();
-			entities.EntityAdded += EntityAdded;
-			entities.EntityRemoved += EntityRemoved;
-			entities.EntityChanged += EntityChanged;
+			eventBus.Register(this, EntityEventTypes.EntityAdded);
+			eventBus.Register(this, EntityEventTypes.EntityRemoved);
+			eventBus.Register(this, EntityEventTypes.EntityChanged);
 		}
 		//-- Addition methods --//
-		public bool Add(AbstractSystem system, IEnumerable<IEntity> existingEntities)
+		public bool Add(AbstractSystem system)
 		{
 			if (wrappers.ContainsKey(system.GetType())) {
 				return false;
@@ -28,7 +30,10 @@ namespace Primal
 			SystemWrapper wrapper = new SystemWrapper(system);
 			wrappers.Add(system.GetType(), wrapper);
 
+			IEnumerable<IEntity> existingEntities =
+				entityFinder.Find(system.RegisteredComponents);
 			foreach (Entity enitity in existingEntities) {
+				// Why was this entity instead of Ientity again? was it dispose?
 				wrapper.AddEntity(enitity);
 			}
 			return true;
@@ -51,21 +56,37 @@ namespace Primal
 			}
 		}
 		//-- Entity Added/Removed Methods --//
-		private void EntityAdded(Entity entity)
+		public void HandleEvent(IEntityEvent e)
+		{
+			IEntity entity = e.Source;
+			switch (e.Type) {
+			case EntityEventTypes.EntityAdded:
+				EntityAdded(entity);
+				break;
+			case EntityEventTypes.EntityRemoved:
+				EntityRemoved(entity);
+				break;
+			case EntityEventTypes.EntityChanged:
+				EntityChanged(entity);
+				break;
+			}
+		}
+
+		private void EntityAdded(IEntity entity)
 		{
 			foreach (SystemWrapper system in wrappers.Values) {
 				system.AddEntity(entity);
 			}
 		}
 
-		private void EntityRemoved(Entity entity)
+		private void EntityRemoved(IEntity entity)
 		{
 			foreach (SystemWrapper system in wrappers.Values) {
 				system.RemoveEntity(entity);
 			}
 		}
 
-		private void EntityChanged(Entity entity)
+		private void EntityChanged(IEntity entity)
 		{
 			foreach (SystemWrapper system in wrappers.Values) {
 				system.UpdateEntityValidity(entity);

@@ -18,9 +18,5 @@ namespace Primal.Tests
 		protected internal override void UpdateEntity(IEntity entity, double elapsedMs)
 		{
 		}
-
-		protected internal override void AddKeyComponents()
-		{
-		}
 	}
 }

@@ -10,9 +10,9 @@ namespace Primal.Tests
 	{
 		public Boolean IsUpdated { get; set; }
 
-		protected internal override void AddKeyComponents()
+		public SystemD()
 		{
-			AddKeyComponent<ComponentD>();
+			RegisterComponent<ComponentD>();
 		}
 
 		protected internal override void BeforeUpdate(double elapsedMs)
