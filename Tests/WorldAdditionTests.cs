@@ -52,7 +52,7 @@ namespace Primal.Tests
 		public void TestDoubleEntitySingleRemoval()
 		{
 			IPrimalWorld world = WorldFactory.Create();
-			IEntity entity = world.CreateEntity().Add(new ComponentA());
+			world.CreateEntity().Add(new ComponentA());
 			IEntity entity2 = world.CreateEntity().Add(new ComponentA());
 
 			world.RemoveEntity(entity2);

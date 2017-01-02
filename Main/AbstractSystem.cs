@@ -21,7 +21,7 @@ namespace Primal
 		/// Reference the EventManager, used to post events and register to them.
 		/// </summary>
 		/// <value>The event manager.</value>
-		protected internal IEventBus EventManager { get; set; }
+		protected internal IEventBus EventBus { get; set; }
 
 		/// <summary>
 		/// Collection of the components an entity needs for the system to act on it.
@@ -52,7 +52,7 @@ namespace Primal
 		/// <param name="elapsedMs">the elapsed time</param>
 		protected internal virtual void Update(IEnumerable<IEntity> entities, double elapsedMs)
 		{
-			foreach (Entity entity in entities) {
+			foreach (IEntity entity in entities) {
 				UpdateEntity(entity, elapsedMs);
 			}
 		}
@@ -113,7 +113,6 @@ namespace Primal
 		/// <param name="entity">The entity that got removed.</param>
 		protected internal virtual void EntityRemoved(IEntity entity)
 		{
-			//#TODO Could be handled as event?
 			//Empty, to be overridden.
 		}
 	}

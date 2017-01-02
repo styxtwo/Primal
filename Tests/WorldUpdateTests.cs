@@ -65,7 +65,7 @@ namespace Primal.Tests
 		{
 			UpdatableSystem system = new UpdatableSystem();
 			IPrimalWorld world = WorldFactory.Create(system);
-			IEntity entity = world.CreateEntity();
+			world.CreateEntity();
 
 			world.Update(0);
 			world.Update(0);
@@ -82,7 +82,7 @@ namespace Primal.Tests
 		{
 			UpdatableSystem system = new UpdatableSystem();
 			IPrimalWorld world = WorldFactory.Create(system);
-			IEntity entity = world.CreateEntity();
+			world.CreateEntity();
 			IEntity entity2 = world.CreateEntity();
 
 			world.Update(0);
@@ -108,8 +108,8 @@ namespace Primal.Tests
 		{
 			UpdatableSystem system = new UpdatableSystem();
 			IPrimalWorld world = WorldFactory.Create(system);
-			IEntity entity = world.CreateEntity();
-			IEntity entity2 = world.CreateEntity();
+			world.CreateEntity();
+			world.CreateEntity();
 
 			world.Update(0);
 			world.Update(0);

@@ -10,16 +10,14 @@ namespace Primal
 	/// </summary>
 	class Entities
 	{
-		public event Action<Entity> EntityChanged;
-		public event Action<Entity> EntityAdded;
-		public event Action<Entity> EntityRemoved;
-
 		public EntityFinder EntityFinder { get; private set; }
 
 		private ISet<Entity> entities;
+		private IEventBus eventBus;
 
-		public Entities()
+		public Entities(IEventBus eventBus)
 		{
+			this.eventBus = eventBus;
 			entities = new HashSet<Entity>();
 			EntityFinder = new EntityFinder(entities);
 		}
@@ -28,20 +26,20 @@ namespace Primal
 		{
 			if (entities.Add(entity)) {
 				entity.ComponentsChanged += EntityComponentsChanged;
-				EntityAdded.NullSafeInvoke(entity);
+				eventBus.Post(EntityEvent.Create(entity, EntityEventTypes.EntityAdded));
 			}
 		}
 
-		void EntityComponentsChanged(Entity entity)
+		void EntityComponentsChanged(IEntity entity)
 		{
-			EntityChanged.NullSafeInvoke(entity);
+			eventBus.Post(EntityEvent.Create(entity, EntityEventTypes.EntityChanged));
 		}
 
 		public bool Remove(Entity entity)
 		{
 			if (entities.Remove(entity)) {
 				entity.ComponentsChanged -= EntityComponentsChanged;
-				EntityRemoved.NullSafeInvoke(entity);
+				eventBus.Post(EntityEvent.Create(entity, EntityEventTypes.EntityRemoved));
 				return true;
 			}
 			return false;

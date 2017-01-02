@@ -77,13 +77,13 @@
     <Compile Include="Tests\Mocks\SystemD.cs" />
     <Compile Include="Tests\Mocks\SystemE.cs" />
     <Compile Include="Tests\Mocks\UpdatableSystem.cs" />
-    <Compile Include="Main\API\Events\IEntityEvent.cs" />
-    <Compile Include="Main\API\Events\EntityRemovedEvent.cs" />
-    <Compile Include="Main\API\Events\AbstractEntityEvent.cs" />
-    <Compile Include="Main\API\Events\IEventHandler.cs" />
-    <Compile Include="Main\API\Events\IEventBus.cs" />
     <Compile Include="Main\EventBus.cs" />
+    <Compile Include="Main\API\Events\EntityEvent.cs" />
+    <Compile Include="Main\API\Events\IEntityEvent.cs" />
+    <Compile Include="Main\API\Events\IEventBus.cs" />
+    <Compile Include="Main\API\Events\IEventHandler.cs" />
     <Compile Include="Main\API\Events\EntityEventTypes.cs" />
+    <Compile Include="Tests\EventBusTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

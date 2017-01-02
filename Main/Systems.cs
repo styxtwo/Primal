@@ -11,11 +11,13 @@ namespace Primal
 	class Systems : IEventHandler
 	{
 		private IDictionary<Type, SystemWrapper> wrappers;
-		EntityFinder entityFinder;
+		private EntityFinder entityFinder;
+		private IEventBus eventBus;
 
-		public Systems(EntityFinder finder, IEventBus eventBus)
+		public Systems(EntityFinder finder, IEventBus bus)
 		{
 			entityFinder = finder;
+			eventBus = bus;
 			wrappers = new Dictionary<Type, SystemWrapper>();
 			eventBus.Register(this, EntityEventTypes.EntityAdded);
 			eventBus.Register(this, EntityEventTypes.EntityRemoved);
@@ -27,12 +29,16 @@ namespace Primal
 			if (wrappers.ContainsKey(system.GetType())) {
 				return false;
 			}
+			
+			system.Finder = entityFinder;
+			system.EventBus = eventBus;
+
 			SystemWrapper wrapper = new SystemWrapper(system);
 			wrappers.Add(system.GetType(), wrapper);
 
 			IEnumerable<IEntity> existingEntities =
 				entityFinder.Find(system.RegisteredComponents);
-			foreach (Entity enitity in existingEntities) {
+			foreach (IEntity enitity in existingEntities) {
 				// Why was this entity instead of Ientity again? was it dispose?
 				wrapper.AddEntity(enitity);
 			}

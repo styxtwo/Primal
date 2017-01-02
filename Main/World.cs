@@ -16,7 +16,7 @@ namespace Primal
 		public World()
 		{
 			eventBus = new EventBus();
-			entities = new Entities();
+			entities = new Entities(eventBus);
 			systems = new Systems(entities.EntityFinder, eventBus);
 			DebugInfo = new DebugInfo(entities, systems);
 		}
@@ -31,8 +31,6 @@ namespace Primal
 
 		public IPrimalWorld AddSystem(AbstractSystem system)
 		{
-			system.Finder = EntityFinder;
-			system.EventManager = eventBus;
 			systems.Add(system);
 			return this;
 		}

@@ -4,8 +4,6 @@ using Primal.Api;
 
 namespace Primal
 {
-	//TODO write tests
-	//# should entity removed events be send via these as well?
 	class EventBus : IEventBus
 	{
 
@@ -18,7 +16,7 @@ namespace Primal
 			if (!handlers.ContainsKey(type)) {
 				return;
 			}
-			foreach (AbstractSystem handler in handlers[type]) {
+			foreach (IEventHandler handler in handlers[type]) {
 				handler.HandleEvent(entityEvent);
 			}
 		}
@@ -28,8 +26,15 @@ namespace Primal
 			if (!handlers.ContainsKey(typeId)) {
 				handlers.Add(typeId, new List<IEventHandler>());
 			}
-			IList<IEventHandler> list = handlers[typeId];
-			list.Add(handler);
+			handlers[typeId].Add(handler);
+		}
+
+		public void Deregister(IEventHandler handler, int typeId)
+		{
+			if (!handlers.ContainsKey(typeId)) {
+				return;
+			}
+			handlers[typeId].Remove(handler);
 		}
 	}
 }
